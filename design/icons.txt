@@ -1,0 +1,30 @@
+Иконки, используемые в проекте
+
+1. Иконка загрузки
+    <a href="https://www.flaticon.com/free-icons/direct-download" title="direct download icons">Direct download icons created by bqlqn - Flaticon</a>
+2. Иконка комментариев
+    <a href="https://www.flaticon.com/free-icons/comment" title="comment icons">Comment icons created by Catalin Fertu - Flaticon</a>
+3. Иконка лайка
+    <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Freepik - Flaticon</a>
+4. Иконка избранных
+    <a href="https://www.flaticon.com/free-icons/save" title="save icons">Save icons created by Freepik - Flaticon</a>
+5. Иконка многоточия
+    <a href="https://www.flaticon.com/free-icons/dots" title="dots icons">Dots icons created by Ayub Irawan - Flaticon</a>
+6. Иконка поделиться
+    <a href="https://www.flaticon.com/free-icons/send" title="send icons">Send icons created by Freepik - Flaticon</a>
+7. Иконка люди
+    <a href="https://www.flaticon.com/free-icons/group" title="group icons">Group icons created by Prosymbols - Flaticon</a>
+8. Иконка видео
+    <a href="https://www.flaticon.com/free-icons/video" title="video icons">Video icons created by th studio - Flaticon</a>
+9. Иконка глаза
+    <a href="https://www.flaticon.com/free-icons/eye" title="eye icons">Eye icons created by mattbadal - Flaticon</a>
+10. Иконка поиска
+    <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Catalin Fertu - Flaticon</a>
+11. Иконка телеграма
+    <a href="https://www.flaticon.com/free-icons/telegram" title="telegram icons">Telegram icons created by Freepik - Flaticon</a>
+12. Иконка инстаграма
+    <a href="https://www.flaticon.com/free-icons/instagram" title="instagram icons">Instagram icons created by Freepik - Flaticon</a>
+13. Иконка гитхаб
+    <a href="https://www.flaticon.com/free-icons/github" title="github icons">Github icons created by Pixel perfect - Flaticon</a>
+
+
