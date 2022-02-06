@@ -26,5 +26,9 @@
     <a href="https://www.flaticon.com/free-icons/instagram" title="instagram icons">Instagram icons created by Freepik - Flaticon</a>
 13. Иконка гитхаб
     <a href="https://www.flaticon.com/free-icons/github" title="github icons">Github icons created by Pixel perfect - Flaticon</a>
+14. Иконка уведомлений
+    <a href="https://www.flaticon.com/free-icons/notification" title="notification icons">Notification icons created by Freepik - Flaticon</a>
+15. Иконка чата
+    <a href="https://www.flaticon.com/free-icons/message" title="message icons">Message icons created by SBTS2018 - Flaticon</a>
 
 
