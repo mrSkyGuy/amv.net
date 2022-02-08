@@ -30,5 +30,7 @@
     <a href="https://www.flaticon.com/free-icons/notification" title="notification icons">Notification icons created by Freepik - Flaticon</a>
 15. Иконка чата
     <a href="https://www.flaticon.com/free-icons/message" title="message icons">Message icons created by SBTS2018 - Flaticon</a>
-
-
+16. Иконка телефона
+    <a href="https://www.flaticon.com/free-icons/phone" title="phone icons">Phone icons created by Adrien Coquet - Flaticon</a>
+17. Иконка почты
+    <a href="https://www.flaticon.com/free-icons/email" title="email icons">Email icons created by Freepik - Flaticon</a>
