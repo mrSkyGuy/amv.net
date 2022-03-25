@@ -1,0 +1,124 @@
+@function getIcon($name) {
+  @return "../../img/" + $name;
+}
+
+
+.feed {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: 20vh;
+}
+
+.current-video {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-video__row {
+  display: flex;
+}
+
+.current-video__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-video__content {
+  object-fit: cover;
+  min-width: 46vw;
+  max-width: 60vw;
+  height: 56vh;
+  border-radius: 15px;
+}
+
+.current-video__description {
+  display: flex;
+  justify-content: space-around;
+
+  p {
+    width: 40vw;
+    overflow: hidden;
+    white-space: wrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-family: 'Roboto';
+  }
+}
+
+.current-video__options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-left: 13px;
+}
+
+.current-video__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 48%;
+  
+  font-family: 'Oxanium';
+}
+
+.current-video__author {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7.5%;
+
+  .author__info {
+    margin-bottom: 7.5%;
+
+    .author__avatar {
+      display: block;
+    }
+    .author__nickname {
+      font-size: 18px;
+      line-height: 25px;
+    }
+  }
+}
+.author__subscribers, .author__videos, .video-info__views, 
+.video-info__likes, .video-info__comments {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 6px;
+    margin-bottom: 2px;
+  }
+}
+
+
+
+.current-video__lcssd {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-video__lcssd_hidden {
+  display: flex;
+  visibility: hidden;  // Появляться будут при нажатии на три точки
+}
+
+.button {
+  border: none;
+  width: 30px;
+  height: 30px;
+
+  &:hover {
+    background-color: #ccc;
+  }
+
+  &:active {
+    background-color: #444;
+  }
+
+  img {
+    width: inherit;
+    height: inherit;
+  }
+}
+

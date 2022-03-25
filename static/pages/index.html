@@ -4,31 +4,97 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles/normalize.css">
-  <link rel="stylesheet" href="../styles/header.css">
-  <link rel="stylesheet" href="../styles/feed.css">
-  <title>amv.net</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Oxanium&family=Roboto&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/css/normalize.css">
+  <link rel="stylesheet" href="../styles/css/header.css">
+  <link rel="stylesheet" href="../styles/css/feed.css">
+  <link rel="stylesheet" href="../styles/css/scrollbar.css">
+
+  <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+  
+  <title>amv.net - искусство рождается здесь</title>
 </head>
 <body>
   <header class="header">
-    <a class="domen" href="#">
-      <span id="domen-2lvl">amv</span><span id="domen-1lvl">.net</span>
-    </a>
-    <div class="search">
-      <img src="../img/search_icon.png" alt="" class="search__icon">
-      <input type="text" class="search__field" placeholder="attack on titan">
-    </div>
-    <div id="button-sign__group">
-      <button class="button-sign">Sign up</button>
-      <button class="button-sign">Sign in</button>
+    <div class="header__container">
+      <a class="domen" href="#">
+        <span id="domen-2lvl">amv</span><span id="domen-1lvl">.net</span>
+      </a>
+      <div class="search">
+        <img src="../img/search_icon.png" alt="" class="search__icon">
+        <input type="text" class="search__field" placeholder="attack on titan">
+      </div>
+      <div class="button-sign__group">
+        <button class="button-sign">Sign up</button>
+        <button class="button-sign">Sign in</button>
+      </div>
     </div>
   </header>
 
   <main class="feed">
+    <div class="previous-video"></div>
     <div class="current-video">
-      <video src="" class="video current"></video>
-      .options
+      <div class="current-video__row">
+        <div class="current-video__column">
+          <!-- <video src="" class="current-video__content"></video> -->
+          <img src="../img/preview.jpg" class="current-video__content">
+          <div class="current-video__description">
+              <p>
+                Music: wasted - Juicy WRLD, Lil Uzi Vert. Like and subscribe, senpai ❤ <br> #bunnygirl #may #maysakurajima
+              </p>
+          </div>
+        </div>
+        <div class="current-video__options">
+          <div class="current-video__info">
+            <div class="current-video__author">
+              <div class="author__info">
+                <img src="../img/author_avatar.png" alt="" class="author__avatar">
+                <span class="author__nickname">SkyGuy</span>
+              </div>
+              <div class="author__subscribers">
+                <img src="../img/subscribers_icon.png" alt="" class="subscribers__icon">
+                <span class="subscribers__count">1.9m</span>
+              </div>
+              <div class="author__videos">
+                <img src="../img/video_icon.png" alt="" class="videos__icon">
+                <span class="videos__count">11</span>
+              </div>
+            </div>
+            <div class="current-video__video-info">
+              <div class="video-info__views">
+                <img src="../img/views_icon.png" alt="" class="views__icon">
+                <span class="views__count">2.7m</span>
+              </div>
+              <div class="video-info__likes">
+                <img src="../img/likes_icon.png" alt="" class="likes__icon">
+                <span class="likes__count">776k</span>
+              </div>
+              <div class="video-info__comments">
+                <img src="../img/comments_icon.png" alt="" class="comments__icon">
+                <span class="comments__count">269</span>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="current-video__lcssd">  
+            // lcssd - like+comment+share+save+download
+            <button class="lcssd__like button"><img src="../img/likes_icon.png" alt="" class="lcssd__like-icon"></button>
+            <button class="lcssd__comment button"><img src="../img/comments_icon.png" alt="" class="lcssd__comment-icon"></button>
+            <button class="lcssd__dots button"><img src="../img/dots_icon.png" alt="" class="lcssd__dots-icon"></button>
+  
+            <div class="current-video__lcssd_hidden">
+              <button class="lcssd__share button"><img src="../img/share_icon.png" alt="" class="lcssd__share-icon"></button>
+              <button class="lcssd__save button"><img src="../img/save_icon.png" alt="" class="lcssd__save-icon"></button>
+              <button class="lcssd__download button"><img src="../img/download_icon.png" alt="" class="lcssd__downloa-icon"></button>
+            </div>
+          </div> -->
+        </div>
+      </div>
     </div>
+    <div class="next-video"></div>
   </main>
 </body>
 </html>
