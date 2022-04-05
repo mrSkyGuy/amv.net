@@ -43,9 +43,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 370px;
+  max-width: 370px;
   height: 32px;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   margin-top: 14px;
+  margin-right: 50px;
   background: rgba(140, 67, 234, 0.23);
   border-radius: 1.76em;
 }
@@ -83,7 +89,7 @@
 }
 
 .button-sign {
-  width: 150px;
+  min-width: 150px;
   height: 34px;
   border: none;
   border-radius: 18px;
@@ -123,29 +129,10 @@
 }
 
 .current-video {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.current-video__row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.current-video__column {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
 }
 
 .current-video__content {
@@ -186,6 +173,97 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding-left: 13px;
+}
+
+.current-video__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 48%;
+  font-family: 'Oxanium';
+}
+
+.current-video__author {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 7.5%;
+}
+
+.current-video__author .author__info {
+  margin-bottom: 7.5%;
+}
+
+.current-video__author .author__info .author__avatar {
+  display: block;
+}
+
+.current-video__author .author__info .author__nickname {
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.author__subscribers, .author__videos, .video-info__views,
+.video-info__likes, .video-info__comments {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.author__subscribers img, .author__videos img, .video-info__views img,
+.video-info__likes img, .video-info__comments img {
+  margin-right: 6px;
+  margin-bottom: 2px;
+}
+
+.current-video__lcssd {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.current-video__lcssd_hidden {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  visibility: hidden;
+}
+
+.button {
+  border: none;
+  width: 30px;
+  height: 30px;
+}
+
+.button img {
+  width: inherit;
+  height: inherit;
+}
+
+.button:hover {
+  background-color: #ccc;
+}
+
+.button:active {
+  background-color: #444;
 }
 
 body::-webkit-scrollbar {
