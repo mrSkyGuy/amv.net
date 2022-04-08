@@ -120,10 +120,7 @@
 }
 
 .current-video__lcssd_hidden {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  visibility: hidden;
+  display: none;
 }
 
 .button {

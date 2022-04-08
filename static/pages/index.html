@@ -13,8 +13,10 @@
   <link rel="stylesheet" href="../styles/css/header.css">
   <link rel="stylesheet" href="../styles/css/feed.css">
   <link rel="stylesheet" href="../styles/css/scrollbar.css">
+  <link rel="stylesheet" href="../styles/css/like-button.css">
 
   <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
   <title>amv.net - искусство рождается здесь</title>
 </head>
@@ -75,7 +77,12 @@
         </div>
         <div class="current-video__lcssd">  
           <!-- lcssd - like+comment+share+save+download -->
-          <button class="lcssd__like button"><img src="../img/likes_icon.png" alt="" class="lcssd__like-icon"></button>
+          
+          <a href="javascript:void(0);" class="like-button">
+            <i class="material-icons not-liked bouncy">favorite_border</i>
+            <i class="material-icons is-liked bouncy">favorite</i>
+            <span class="like-overlay"></span>
+          </a>
           <button class="lcssd__comment button"><img src="../img/comments_icon.png" alt="" class="lcssd__comment-icon"></button>
           <button class="lcssd__dots button"><img src="../img/dots_icon.png" alt="" class="lcssd__dots-icon"></button>
 
@@ -94,5 +101,8 @@
     </div>
     <div class="next-video"></div>
   </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../scripts/like-button.js"></script>
 </body>
 </html>

@@ -87,8 +87,8 @@
 }
 
 .current-video__lcssd_hidden {
-  display: flex;
-  visibility: hidden;  // Появляться будут при нажатии на три точки
+  // display: flex;
+  display: none;  // Появляться будут при нажатии на три точки
 }
 
 .button {
