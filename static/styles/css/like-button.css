@@ -64,6 +64,8 @@
   background-color: #b387eb;
   -webkit-transition: .4s;
   transition: .4s;
+  -webkit-box-shadow: 0 0 5px #606060;
+  box-shadow: 0 0 5px #606060;
 }
 
 .like-button:not(:hover) {

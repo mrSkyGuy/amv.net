@@ -1,3 +1,8 @@
+$purple: #8C43EA;
+$light-purple: #b387eb;
+$grey: #ccc;
+
+
 @function getIcon($name) {
   @return "../../img/" + $name;
 }
@@ -86,27 +91,37 @@
   flex-direction: column;
 }
 
-.current-video__lcssd_hidden {
-  // display: flex;
-  display: none;  // Появляться будут при нажатии на три точки
+.lcssd__icon {
+  font-size: 30px;
 }
 
 .button {
   border: none;
-  width: 30px;
-  height: 30px;
-
-  img {
-    width: inherit;
-    height: inherit;
-  }
-
+  border-radius: 50%;
+  
+  width: 40px;
+  height: 40px;
+  padding-top: 6px;
+  
+  cursor: pointer;
+  
   &:hover {
-    background-color: #ccc;
-  }
+    background-color: $light-purple;
+    transition: .2s;
 
+    -webkit-box-shadow: 0 0 5px #606060;
+            box-shadow: 0 0 5px #606060;
+  } 
+  &:not(:hover) {
+    background-color: $grey;
+    transition: .4s;
+  }
   &:active {
-    background-color: #444;
+    background-color: $purple;
   }
 }
 
+.current-video__lcssd_hidden {
+  // display: flex;
+  display: none;  // Появляться будут при нажатии на три точки
+}

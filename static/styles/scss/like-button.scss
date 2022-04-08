@@ -65,6 +65,9 @@ $white: #fff;
   &:hover {
     background-color: $light-purple-heart;
     transition: .4s;
+
+    -webkit-box-shadow: 0 0 5px #606060;
+            box-shadow: 0 0 5px #606060;
   } &:not(:hover) {
     background-color: $grey;
     transition: .4s;
