@@ -52,8 +52,8 @@ $grey: #ccc;
 .current-video__info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 48%;
+  // justify-content: space-between;
+  // height: 48%;
   
   font-family: 'Oxanium';
 }
@@ -102,6 +102,7 @@ $grey: #ccc;
   width: 40px;
   height: 40px;
   padding-top: 6px;
+  margin-bottom: 7.5%;
   
   cursor: pointer;
   
@@ -114,7 +115,7 @@ $grey: #ccc;
   } 
   &:not(:hover) {
     background-color: $grey;
-    transition: .4s;
+    transition: .2s;
   }
   &:active {
     background-color: $purple;

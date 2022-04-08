@@ -15,6 +15,7 @@
           align-items: center;
   text-decoration: none;
   overflow: hidden;
+  margin-bottom: 7.5%;
 }
 
 .like-button .like-overlay {
