@@ -1,6 +1,7 @@
 $purple: #8C43EA;
 $light-purple: #b387eb;
 $grey: #ccc;
+$margin-for-video-info: 1vh;
 
 
 @function getIcon($name) {
@@ -61,16 +62,17 @@ $grey: #ccc;
 .current-video__author {
   display: flex;
   flex-direction: column;
-  margin-bottom: 7.5%;
+  margin-bottom: $margin-for-video-info;
 }
 .author__info {
-  margin-bottom: 7.5%;
+  margin-bottom: $margin-for-video-info;
 }
 .author__avatar {
   display: block;
 }
 .author__nickname {
   font-size: 18px;
+  font-weight: bold;
   line-height: 25px;
 }
 

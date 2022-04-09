@@ -74,11 +74,11 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-bottom: 7.5%;
+  margin-bottom: 1vh;
 }
 
 .author__info {
-  margin-bottom: 7.5%;
+  margin-bottom: 1vh;
 }
 
 .author__avatar {
@@ -87,6 +87,7 @@
 
 .author__nickname {
   font-size: 18px;
+  font-weight: bold;
   line-height: 25px;
 }
 
