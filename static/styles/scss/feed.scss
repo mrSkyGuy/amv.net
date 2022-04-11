@@ -136,11 +136,11 @@ $margin-for-video-info: 1vh;
   position: absolute;
   z-index: 999;
   
-  background: rgba(00, 00, 00, .2);
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
   height: 100%;
   width: 100%;
+
+  background: rgba(00, 00, 00, .2);
+  backdrop-filter: blur(4px);
 }
 
 /* Просмотренное видео (previous) */
@@ -152,6 +152,8 @@ $margin-for-video-info: 1vh;
   max-width: 26vw;
   height: 46vh;
   border-radius: 12px;
+
+  box-shadow: 0 0 10px 1.5px #606060;
 }
 
 
@@ -172,6 +174,8 @@ $margin-for-video-info: 1vh;
   max-width: 26vw;
   height: 46vh;
   border-radius: 12px;
+
+  box-shadow: 0 0 10px 1.5px #606060;
 }
 
 .next-video__content {
