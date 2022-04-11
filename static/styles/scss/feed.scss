@@ -31,7 +31,7 @@ $margin-for-video-info: 1vh;
   height: 56vh;
   border-radius: 15px;
 
-  box-shadow: 0px 0px 25px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.25);
 }
 
 .current-video__description {
@@ -180,4 +180,26 @@ $margin-for-video-info: 1vh;
   object-fit: cover;
   width: 100%;
   height: 100%;
+}
+
+
+/* Переключатели видео (switch) */
+.switch {
+  text-decoration: none;
+  
+  span {
+    font-size: 27px;
+    transition: .2s;
+    color: #191919;
+
+    &:hover {
+      font-weight: 500;
+      transform: scale(1.3);
+      color: $light-purple
+    } 
+    &:active {
+      font-weight: 700;
+      color: $purple;
+    }
+  }
 }
