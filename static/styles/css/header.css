@@ -17,7 +17,7 @@
   padding-left: 20px;
   background: rgba(191, 191, 191, 0.5);
   -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
   border-radius: 0px 0px 20px 20px;
 }
 
