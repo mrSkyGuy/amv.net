@@ -103,6 +103,13 @@
   margin-bottom: 2px;
 }
 
+span[class^="material-icons"] {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .author__subscribers, .author__videos, .video-info__views,
 .video-info__likes, .video-info__comments {
   display: -webkit-box;
@@ -163,14 +170,14 @@
   z-index: 0;
 }
 
-.like-button i.not-liked {
+.like-button span.not-liked {
   display: block;
   color: #fff;
   position: relative;
   z-index: 1;
 }
 
-.like-button i.is-liked {
+.like-button span.is-liked {
   display: none;
   color: #fff;
   position: relative;
@@ -182,11 +189,11 @@
           transform: scale(1);
 }
 
-.like-button.is-active i.not-liked {
+.like-button.is-active span.not-liked {
   display: none;
 }
 
-.like-button.is-active i.is-liked {
+.like-button.is-active span.is-liked {
   display: block;
 }
 

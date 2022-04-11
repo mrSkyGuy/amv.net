@@ -83,6 +83,10 @@ $margin-for-video-info: 1vh;
   margin-bottom: 2px;
 }
 
+span[class ^= "material-icons"] {
+  user-select: none;
+}
+
 .author__subscribers, .author__videos, .video-info__views, 
 .video-info__likes, .video-info__comments {
   display: flex;
@@ -126,7 +130,7 @@ $margin-for-video-info: 1vh;
     z-index: 0;
   }
 
-  i {
+  span {
     &.not-liked {
       display: block;
       color: #fff;
@@ -145,7 +149,7 @@ $margin-for-video-info: 1vh;
     .like-overlay {
       transform: scale(1);
     }
-    i {
+    span {
       &.not-liked {
         display: none;
       }
