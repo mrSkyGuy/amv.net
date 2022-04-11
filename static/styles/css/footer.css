@@ -1,0 +1,43 @@
+.footer {
+  width: 100vw;
+  margin-top: auto;
+}
+
+.footer__container {
+  background-color: rgba(191, 191, 191, 0.5);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 35px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 7px;
+}
+
+.footer__devby-name {
+  font-family: "Oxanium";
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.footer__contacts a {
+  text-decoration: none;
+}
+
+.contacts__item {
+  margin-right: 2px;
+}
+
+.logo-icon {
+  width: 20px;
+  height: 20px;
+}
+/*# sourceMappingURL=footer.css.map */

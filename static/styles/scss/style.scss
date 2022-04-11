@@ -1,3 +1,11 @@
 @import "header.scss";
 @import "feed.scss";
+@import "footer.scss";
 @import "scrollbar.scss";
+
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
