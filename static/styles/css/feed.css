@@ -127,6 +127,126 @@
   font-size: 25px;
 }
 
+.like-button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  overflow: hidden;
+  margin-bottom: 7.5%;
+}
+
+.like-button .like-overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #8C43EA;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all .4s;
+  transition: all .4s;
+  z-index: 0;
+}
+
+.like-button i.not-liked {
+  display: block;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.like-button i.is-liked {
+  display: none;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.like-button.is-active .like-overlay {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.like-button.is-active i.not-liked {
+  display: none;
+}
+
+.like-button.is-active i.is-liked {
+  display: block;
+}
+
+.like-button:hover {
+  background-color: #b387eb;
+  -webkit-transition: .4s;
+  transition: .4s;
+  -webkit-box-shadow: 0 0 5px #606060;
+  box-shadow: 0 0 5px #606060;
+}
+
+.like-button:not(:hover) {
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+@-webkit-keyframes bouncy {
+  from, to {
+    -webkit-transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+  }
+}
+
+@keyframes bouncy {
+  from, to {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+            transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+            transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+            transform: scale(0.95, 1.05);
+  }
+}
+
+.bouncy {
+  -webkit-animation: bouncy 0.6s;
+  animation: bouncy 0.6s;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
 .button {
   border: none;
   border-radius: 50%;
