@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .header {
   position: fixed;
   top: 0;
@@ -153,9 +154,13 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-top: 20vh;
 }
 
+/* Текущее видео (current) */
 .current-video {
   display: -ms-grid;
   display: grid;
@@ -171,6 +176,8 @@
   max-width: 60vw;
   height: 56vh;
   border-radius: 15px;
+  -webkit-box-shadow: 0px 0px 25px 12px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 25px 12px rgba(0, 0, 0, 0.25);
 }
 
 .current-video__description {
@@ -222,11 +229,11 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-bottom: 7.5%;
+  margin-bottom: 1vh;
 }
 
 .author__info {
-  margin-bottom: 7.5%;
+  margin-bottom: 1vh;
 }
 
 .author__avatar {
@@ -235,6 +242,7 @@
 
 .author__nickname {
   font-size: 18px;
+  font-weight: bold;
   line-height: 25px;
 }
 
@@ -297,6 +305,52 @@
 
 .current-video__lcssd_hidden {
   display: none;
+}
+
+.blur {
+  position: absolute;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  height: 100%;
+  width: 100%;
+}
+
+/* Просмотренное видео (previous) */
+.previous-video {
+  overflow: hidden;
+  position: relative;
+  min-width: 12vw;
+  max-width: 26vw;
+  height: 46vh;
+  border-radius: 12px;
+}
+
+.previous-video__content {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Следующее видео (next) */
+.next-video {
+  overflow: hidden;
+  position: relative;
+  min-width: 12vw;
+  max-width: 26vw;
+  height: 46vh;
+  border-radius: 12px;
+}
+
+.next-video__content {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 body::-webkit-scrollbar {
