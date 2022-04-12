@@ -8,15 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Oxanium&family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"                                             rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"                                    rel="stylesheet">
 
   <link rel="stylesheet" href="../styles/css/sign.css">
   <link rel="stylesheet" href="../styles/css/normalize.css">
-  <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+  <link rel="icon"       href="../img/favicon.png" type="image/x-icon">
   <title>amv.net — sign in/up</title>
 </head>
 <body>
+  <div class="blur"></div>
+  
   <header class="header">
     <div class="header__container">
       <a class="domen" href="#">
@@ -26,12 +28,49 @@
       </a>
 
       <div class="sign-buttons">
-        <a class="button-sign" href="javascript:void(0);">Sign up</a>
+        <a class="button-sign selected-tab" href="javascript:void(0);">Sign up</a>
         <a class="button-sign" href="javascript:void(0);">Sign in</a>
       </div>
     </div>
   </header>
 
-  <div class="blur"></div>
+  <main class="main">
+    <div class="sign-up__description">
+      <div class="sign-up__description_header">Here you can register.</div>
+
+      <div class="sign-up__description_text">
+        After completing this step, new abilities will open up in front of you.
+      </div> 
+      <strong>Such as:</strong>
+      <ul>
+        <li>Adjust the recommendations feed for yourself</li>
+        <li>Upload your own video</li>
+        <li>Chat with like-minded people</li>
+        <li>And many other features</li>
+      </ul>
+    </div>
+    <div class="sign-up__form">
+      <div class="sign-up__form-header">Base info</div>
+
+      <form action="#" class="form" method="post">
+        <div class="form__row">
+          <label for="username" class="form__input-label">username</label>
+          <input type="text" name="username" placeholder="type here..." class="form__input">
+        </div>
+        <div class="form__row">
+          <label for="phone-email" class="form__input-label">phone/email</label>
+          <input type="text" name="phone-email" placeholder="type here..." class="form__input">
+        </div>
+        <div class="form__row">
+          <label for="password" class="form__input-label">password</label>
+          <input type="password" name="password" placeholder="type here..." class="form__input">
+        </div>
+
+        <input type="submit" class="form__submit" value="Continue">
+      </form>
+    </div>
+  </main>
+  
+  <!-- <script src="../scripts/switch-tab.js"></script> -->
 </body>
 </html>

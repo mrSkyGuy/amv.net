@@ -1,3 +1,6 @@
+$description-text-color: #fff;
+
+
 body {
 	position: relative;
 
@@ -34,6 +37,7 @@ body {
 }
 
 .domen {
+  position: absolute;
   text-decoration: none;
   margin-right: calc(max(3vw, 10px));
 }
@@ -65,4 +69,135 @@ body {
 
 .domen-1lvl {
   font-size: 28px;
+}
+
+
+.sign-buttons {
+  width: 240px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-sign {
+  text-decoration: none;
+
+  font-family: 'Oxanium';
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.selected-tab {
+  padding: 6px 16px;
+  background: rgba(140, 67, 234, 0.4);
+  border-radius: 14px;
+}
+
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sign-up__description {
+  // width: 45%;
+  font-family: 'Oxanium';
+  color: $description-text-color;
+  font-size: 20px;
+
+  .sign-up__description_header {
+    font-size: 35px;
+    margin-bottom: 3px;
+  }
+  ul { 
+    margin: 0; 
+    list-style-type: square;
+  }
+  li {
+    margin-bottom: 1px;
+  }
+}
+
+
+.sign-up__form {
+  width: 36vw;
+  font-family: 'Oxanium';
+  background: linear-gradient(104.41deg, 
+    #8C43EA -6.55%, 
+    rgba(140, 67, 234, 0.17) 109.24%
+  );
+  border-radius: 30px;
+  padding: 24px;
+}
+
+.sign-up__form-header {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5);
+
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__row:nth-child(-n + 2) {  // Количество инпутов - 1
+  margin-bottom: 7px;
+}
+
+.form__input-label {
+  display: block;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.form__input {
+  width: 50%;
+  max-width: 250px;
+  min-width: 175px;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  padding: 3px 10px;
+  
+  transition: .3s;
+  &:focus {
+    transform: scale(1.03);
+    outline: none;
+    box-shadow: 0px 0px 5px 2px rgba(51, 51, 51, .5);
+  }
+}
+
+.form__submit {
+  align-self: end;
+
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+  
+  background: rgba(140, 67, 234, 0.8);
+  border-radius: 15px;
+  padding: 6px 24px;
+  margin-top: 14px;
+
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 5px 2px rgba(51, 51, 51, .5);
+  }
+  &:active {
+    transform: scale(1);
+    box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, .5);
+  }
+
 }
