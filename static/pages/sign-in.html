@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Oxanium&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"                                             rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"                                    rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/css/sign.css">
+  <link rel="stylesheet" href="../styles/css/normalize.css">
+  <link rel="icon"       href="../img/favicon.png" type="image/x-icon">
+  <title>amv.net — sign in/up</title>
+</head>
+<body>
+  <div class="blur"></div>
+  
+  <header class="header">
+    <div class="header__container">
+      <a class="domen" href="#">
+        <div class="domen__item">
+          <span class="domen-2lvl">amv</span><span class="domen-1lvl">.net</span>
+        </div>
+      </a>
+
+      <div class="sign-buttons">
+        <a class="button-sign" href="javascript:void(0);">Sign up</a>
+        <a class="button-sign selected-tab" href="javascript:void(0);">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="sign-up-in__description">
+    <div class="sign-up-in__description_header">Hey. We are glad to have you back.</div> 
+      <div class="sign-up-in__description_text">
+        During your absence, 42 videos have been released from your subscriptions. They are waiting for your like ;)
+      </div>
+    </div>
+    <div class="sign-up-in__form">
+      <div class="sign-up-in__form-header">Authentication</div>
+
+      <form action="#" class="form" method="post">
+        <div class="form__row">
+          <label for="username-email-phone" class="form__input-label">username/email/phone</label>
+          <input type="text" name="username-email-phone" placeholder="type here..." class="form__input">
+        </div>
+        <div class="form__row">
+          <label for="password" class="form__input-label">password</label>
+          <input type="password" name="password" placeholder="type here..." class="form__input">
+        </div>
+
+        <input type="submit" class="form__submit" value="Continue">
+      </form>
+    </div>
+  </main>
+  
+  <!-- <script src="../scripts/switch-tab.js"></script> -->
+</body>
+</html>

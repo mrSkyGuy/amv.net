@@ -118,27 +118,28 @@ body {
           align-items: center;
 }
 
-.sign-up__description {
+.sign-up-in__description {
+  width: 40%;
   font-family: 'Oxanium';
   color: #fff;
   font-size: 20px;
 }
 
-.sign-up__description .sign-up__description_header {
+.sign-up-in__description .sign-up-in__description_header {
   font-size: 35px;
   margin-bottom: 3px;
 }
 
-.sign-up__description ul {
+.sign-up-in__description ul {
   margin: 0;
   list-style-type: square;
 }
 
-.sign-up__description li {
+.sign-up-in__description li {
   margin-bottom: 1px;
 }
 
-.sign-up__form {
+.sign-up-in__form {
   width: 36vw;
   font-family: 'Oxanium';
   background: linear-gradient(104.41deg, #8C43EA -6.55%, rgba(140, 67, 234, 0.17) 109.24%);
@@ -146,7 +147,7 @@ body {
   padding: 24px;
 }
 
-.sign-up__form-header {
+.sign-up-in__form-header {
   font-size: 20px;
   color: rgba(0, 0, 0, 0.5);
   margin-bottom: 16px;
