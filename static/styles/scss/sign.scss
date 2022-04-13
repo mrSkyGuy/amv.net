@@ -105,14 +105,15 @@ body {
 
 
 .main {
+  overflow: hidden;
+  position: relative;
   width: 100vw;
   height: 100vh;
 }
 
 .sign-up, .sign-in {
-  // overflow: hidden;
-  display: none;
-  position: relative;
+  display: flex;
+  position: absolute;
 
   width: 100%;
   height: 100%;
@@ -120,13 +121,15 @@ body {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+
+  transition: transform 1s cubic-bezier(0.17, 0.8, 0.33, 0.99)/*cubic-bezier(0.17, 0.8, 0.33, 0.99)*/;
 }
 
-// .sign-up {
-//   transform: translateX(-200%);
-// } .sign-in {
-//   transform: translateX(200%);
-// }
+.sign-up {
+  transform: translateX(-100%);
+} .sign-in {
+  transform: translateX(100%);
+}
 
 .sign-up-in__description {
   width: 40%;
@@ -227,8 +230,7 @@ body {
 
 
 .current-page {
-  // transform: translateX(0%);
-  display: flex;
+  transform: translateX(0%);
 }
 
 
@@ -245,6 +247,6 @@ body {
   border-radius: 14px;
   width: $tab-width;
   
-  transition: transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99), width 0.5s linear;
+  transition: transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99);
   background: rgba(140, 67, 234, 0.4) !important;
 }
