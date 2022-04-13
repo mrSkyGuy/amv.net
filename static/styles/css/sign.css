@@ -18,6 +18,7 @@ body {
 .header {
   position: fixed;
   width: 100vw;
+  z-index: 10;
 }
 
 .header__container {
@@ -38,7 +39,7 @@ body {
   margin-right: calc(max(3vw, 10px));
 }
 
-.domen__item {
+.domen .domen__item {
   font-family: 'Akaya Telivigala';
   font-weight: 400;
   line-height: 100%;
@@ -65,16 +66,17 @@ body {
   }
 }
 
-.domen-2lvl {
+.domen .domen-2lvl {
   font-size: 48px;
 }
 
-.domen-1lvl {
+.domen .domen-1lvl {
   font-size: 28px;
 }
 
 .sign-buttons {
-  width: 240px;
+  position: relative;
+  width: 280px;
   margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -88,25 +90,31 @@ body {
 }
 
 .button-sign {
+  width: 135px;
+  padding: 6px 16px;
   text-decoration: none;
   font-family: 'Oxanium';
   font-size: 30px;
   font-weight: bold;
   color: #fff;
-}
-
-.selected-tab {
-  padding: 6px 16px;
-  background: rgba(140, 67, 234, 0.4);
-  border-radius: 14px;
+  background: transparent;
+  -webkit-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  -webkit-transition-delay: 0.1s;
+          transition-delay: 0.1s;
+  z-index: 1;
 }
 
 .main {
   width: 100vw;
   height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+}
+
+.sign-up, .sign-in {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -222,5 +230,28 @@ body {
           transform: scale(1);
   -webkit-box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
           box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+.current-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.selected-tab-indicator {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  padding: 6px 16px;
+  border-radius: 14px;
+  width: 135px;
+  -webkit-transition: width 0.5s linear, -webkit-transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99);
+  transition: width 0.5s linear, -webkit-transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99);
+  transition: transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99), width 0.5s linear;
+  transition: transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99), width 0.5s linear, -webkit-transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99);
+  background: rgba(140, 67, 234, 0.4) !important;
 }
 /*# sourceMappingURL=sign.css.map */

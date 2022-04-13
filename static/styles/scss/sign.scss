@@ -1,4 +1,6 @@
 $description-text-color: #fff;
+$tab-width: 135px;
+$tab-space: 10px;
 
 
 body {
@@ -25,6 +27,7 @@ body {
 .header {
 	position: fixed;
 	width: 100vw;
+  z-index: 10;
 }
 
 .header__container {
@@ -40,40 +43,44 @@ body {
   position: absolute;
   text-decoration: none;
   margin-right: calc(max(3vw, 10px));
-}
 
-.domen__item {
-  font-family: 'Akaya Telivigala';
-  font-weight: 400;
-  line-height: 100%;
+  .domen__item {
+    font-family: 'Akaya Telivigala';
+    font-weight: 400;
+    line-height: 100%;
+  
+    // color: #8C43EA;
+    background: linear-gradient(to right, #8C43EA 30%, #B06AB3);
+    background-size: 200% auto;
+  
+    color: #000;
+    background-clip: text;
+    // text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    animation: gradient_animation 7s linear infinite;
+  
+    @keyframes gradient_animation {
+      to { background-position: 200% center; }
+    }
+  }
 
-  // color: #8C43EA;
-  background: linear-gradient(to right, #8C43EA 30%, #B06AB3);
-  background-size: 200% auto;
-
-  color: #000;
-  background-clip: text;
-  // text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: gradient_animation 7s linear infinite;
-
-  @keyframes gradient_animation {
-    to { background-position: 200% center; }
+  .domen-2lvl {
+    font-size: 48px;
+  }
+  
+  .domen-1lvl {
+    font-size: 28px;
   }
 }
-.domen-2lvl {
-  font-size: 48px;
-}
 
-.domen-1lvl {
-  font-size: 28px;
-}
 
 
 .sign-buttons {
-  width: 240px;
+  position: relative;
+
+  width: $tab-width * 2 + $tab-space;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -81,29 +88,45 @@ body {
 }
 
 .button-sign {
+  width: $tab-width;
+  padding: 6px 16px;
   text-decoration: none;
 
   font-family: 'Oxanium';
   font-size: 30px;
   font-weight: bold;
   color: #fff;
-}
+  background: transparent;
 
-.selected-tab {
-  padding: 6px 16px;
-  background: rgba(140, 67, 234, 0.4);
-  border-radius: 14px;
+  transition: color 0.1s linear;
+  transition-delay: 0.1s;
+  z-index: 1;
 }
 
 
 .main {
   width: 100vw;
   height: 100vh;
-  display: flex;
+}
+
+.sign-up, .sign-in {
+  // overflow: hidden;
+  display: none;
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
+
+// .sign-up {
+//   transform: translateX(-200%);
+// } .sign-in {
+//   transform: translateX(200%);
+// }
 
 .sign-up-in__description {
   width: 40%;
@@ -200,4 +223,28 @@ body {
     box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, .5);
   }
 
+}
+
+
+.current-page {
+  // transform: translateX(0%);
+  display: flex;
+}
+
+
+
+.selected-tab-indicator {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+
+  padding: 6px 16px;
+  border-radius: 14px;
+  width: $tab-width;
+  
+  transition: transform 0.5s cubic-bezier(0.17, 0.8, 0.33, 0.99), width 0.5s linear;
+  background: rgba(140, 67, 234, 0.4) !important;
 }
