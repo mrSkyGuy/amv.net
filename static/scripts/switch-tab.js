@@ -18,7 +18,7 @@ tabs.forEach(tab => tab.addEventListener('click', e => {
         pages[1].classList.add('current-page')
         pages[0].classList.remove('current-page')
     }
-    indicator.style.transform = `translate3d(calc( ${indicatorWidth} * ${tabIndex} ), 0, 0)`
+    indicator.style.transform = `translateX(calc( ${indicatorWidth} * ${tabIndex} + ${10 / 2 * tabIndex}px))`  // 10 - tab-space из sign-up-in.scss файла
     indicator.style.width = `calc(${indicatorWidth} + 2%)`
     setTimeout(() => indicator.style.width = indicatorWidth, 100)
 }))
