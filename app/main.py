@@ -20,7 +20,6 @@ import config
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
-app.config["DEBUG_MODE"] = True
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -30,7 +29,7 @@ from data.routes import *
 
 
 def main():
-    app.run(host=config.HOST, port=config.PORT, debug=False)
+    app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG_MODE)
 
 if __name__ == "__main__":
     main()
