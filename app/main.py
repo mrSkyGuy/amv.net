@@ -16,6 +16,7 @@ from flask_login import (
 )
 
 from data import db_session
+from data.models.users import User
 import config
 
 app = Flask(__name__)
@@ -25,10 +26,18 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
+    # return User.query.get(user_id)
+
+
 from data.routes import *
 
 
 def main():
+    db_session.global_init("db/db.sqlite")
     app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG_MODE)
 
 if __name__ == "__main__":

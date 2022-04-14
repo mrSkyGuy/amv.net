@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Oxanium&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <link rel="stylesheet" href="../static/styles/css/normalize.css">
+  <link rel="stylesheet" href="../static/styles/css/style.css">
+  <!-- <link rel="stylesheet" href="../static/styles/css/header.css">
+  <link rel="stylesheet" href="../static/styles/css/feed.css">
+  <link rel="stylesheet" href="../static/styles/css/footer.css">
+  <link rel="stylesheet" href="../static/styles/css/scrollbar.css"> -->
+
+  <link rel="icon" href="../static/img/favicon.png" type="image/x-icon">
+  <title>amv.net — искусство рождается здесь</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__container">
+      <a class="domen" href="#">
+        <div class="domen__item">
+          <span class="domen-2lvl">amv</span><span class="domen-1lvl">.net</span>
+        </div>
+      </a>
+      <div class="search">
+        <span class="material-icons search__icon">search</span>
+        <input type="text" class="search__field" placeholder="attack on titan">
+      </div>
+      <div class="button-sign__group">
+        <button class="button-sign">Sign up</button>
+        <button class="button-sign">Sign in</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="feed">
+    <div class="previous-video">
+      <div class="blur"></div>
+      <div class="previous-video__preview">
+        <img src="../static/img/pervious_video_preview.jpg" class="previous-video__content">
+      </div>
+    </div>
+    
+    <div class="previous-video-switch">
+      <a href="javascript:void(0);" class="switch">
+        <span class="material-icons-outlined">chevron_left</span>
+      </a>
+    </div>
+
+    <div class="current-video">
+      <div class="current-video__video">
+        <!-- <video src="" class="current-video__content"></video> -->
+        <img src="../static/img/current_video_preview.jpg" class="current-video__content">
+      </div>
+      <div class="current-video__options">
+        <div class="current-video__info">
+          <div class="current-video__author">
+            <div class="author__info">
+              <img src="../static/img/author_avatar.png" alt="" class="author__avatar">
+              <span class="author__nickname">SkyGuy</span>
+            </div>
+            <div class="author__subscribers">
+              <span class="material-icons-outlined subscribers__icon icon">groups</span>
+              <span class="subscribers__count">1.9m</span>
+            </div>
+            <div class="author__videos">
+              <span class="material-icons-outlined videos__icon icon">video_library</span>
+              <span class="videos__count">11</span>
+            </div>
+          </div>
+          <div class="current-video__video-info">
+            <div class="video-info__views">
+              <span class="material-icons-outlined views__icon icon">visibility</span>
+              <span class="views__count">2.7m</span>
+            </div>
+            <div class="video-info__likes">
+              <span class="material-icons-outlined likes__icon icon">favorite_border</span>
+              <span class="likes__count">776k</span>
+            </div>
+            <div class="video-info__comments">
+              <span class="material-icons-outlined comments__icon icon">textsms</span>
+              <span class="comments__count">269</span>
+            </div>
+          </div>
+        </div>
+        <div class="current-video__lcssd">  
+          <!-- lcssd - like+comment+share+save+download -->
+          
+          <a href="javascript:void(0);" class="like-button">
+            <span class="material-icons not-liked bouncy">favorite_border</span>
+            <span class="material-icons is-liked bouncy">favorite</span>
+            <span class="like-overlay"></span>
+          </a>
+          <button class="lcssd__comment button">
+            <span class="material-icons-outlined lcssd__comment-icon lcssd__icon">textsms</span>
+          </button>
+          <button class="lcssd__dots button">
+            <span class="material-icons-outlined lcssd__dots-icon lcssd__icon">more_horiz</span>
+          </button>
+
+          <div class="current-video__lcssd_hidden">
+            <button class="lcssd__share button"><img src="../static/img/share_icon.png" alt="" class="lcssd__share-icon"></button>
+            <button class="lcssd__save button"><img src="../static/img/save_icon.png" alt="" class="lcssd__save-icon"></button>
+            <button class="lcssd__download button"><img src="../static/img/download_icon.png" alt="" class="lcssd__downloa-icon"></button>
+          </div>
+        </div>
+      </div>
+      <div class="current-video__description">
+        <p>
+          Music: wasted - Juicy WRLD, Lil Uzi Vert. Like and subscribe, senpai ❤ <br> #bunnygirl #may #maysakurajima
+        </p>
+    </div>
+    </div>
+        
+    <div class="next-video-switch">
+      <a href="javascript:void(0);" class="switch">
+        <span class="material-icons-outlined">chevron_right</span>
+      </a>
+    </div>
+
+    <div class="next-video">
+      <div class="blur"></div>
+      <div class="next-video__preview">
+        <img src="../static/img/next_video_preview.jpg" class="next-video__content">
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <span class="footer__devby-name">&#169; SkyGuy</span>
+      <div class="footer__contacts">
+        <a href="https://t.me/skyguy" class="contacts__item" target="_blank">
+          <img src="../static/img/telegram-logo_icon.svg" class="logo-icon">
+        </a>
+        <a href="https://instagram.com/_.skyguy._" class="contacts__item" target="_blank">
+          <img src="../static/img/instagram-logo_icon.svg" class="logo-icon">
+        </a>
+        <a href="https://github.com/mrskyguy" class="contacts__item" target="_blank">
+          <img src="../static/img/github-logo_icon.svg" class="logo-icon">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../static/scripts/like-button.js"></script>
+</body>
+</html>

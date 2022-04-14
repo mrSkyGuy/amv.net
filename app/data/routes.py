@@ -9,4 +9,5 @@ def root():
 
 @app.route("/feed")
 def feed():
-    return "feed"
+    return render_template("feed.html")
+    # return "123"
