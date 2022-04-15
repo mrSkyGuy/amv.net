@@ -10,7 +10,7 @@ class User(SqlAlchemyBase, UserMixin):
     __tablename__ = "users"
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    username = sqlalchemy.Column(sqlalchemy.String)
+    username = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
     avatar_image = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
     phone = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
