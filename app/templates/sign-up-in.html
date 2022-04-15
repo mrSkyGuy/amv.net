@@ -30,7 +30,7 @@
       </a>
 
       <div class="sign-buttons">
-        <a class="button-sign " href="javascript:void(0);">Sign up</a>
+        <a class="button-sign" href="javascript:void(0);">Sign up</a>
         <a class="button-sign" href="javascript:void(0);">Sign in</a>
         <div class="selected-tab-indicator"></div>
       </div>
@@ -56,21 +56,64 @@
       <div class="sign-up-in__form">
         <div class="sign-up-in__form-header">Base info</div>
   
-        <form action="#" class="form" method="post">
+        <form action="#" class="form" method="post" novalidate>
+          {{ sign_up_form.csrf_token }}
+
           <div class="form__row">
-            <label for="username" class="form__input-label">username</label>
-            <input type="text" name="username" placeholder="type here..." class="form__input">
+            <!-- <label for="username" class="form__input-label">username</label> -->
+            <!-- <input type="text" name="username" placeholder="type here..." class="form__input"> -->
+            {{ sign_up_form.username.label(class="form__input-label") }}
+            {{ sign_up_form.username(
+                class="form__input", 
+                placeholder="type here..."
+              ) }}
+
+            {% for error in sign_up_form.username.errors %}
+              <span style="color: red;">{{ error }}</span>
+            {% endfor %}
           </div>
           <div class="form__row">
-            <label for="phone-email" class="form__input-label">phone/email</label>
-            <input type="text" name="phone-email" placeholder="type here..." class="form__input">
+            <!-- <label for="phone-email" class="form__input-label">phone/email</label> -->
+            <!-- <input type="text" name="phone-email" placeholder="type here..." class="form__input"> -->
+            {{ sign_up_form.email.label(class="form__input-label") }}
+            {{ sign_up_form.email(
+                class="form__input", 
+                placeholder="type here..."
+              ) }}
+            
+            {% for error in sign_up_form.email.errors %}
+              <span style="color: red;">{{ error }}</span>
+            {% endfor %}
           </div>
           <div class="form__row">
-            <label for="password" class="form__input-label">password</label>
-            <input type="password" name="password" placeholder="type here..." class="form__input">
+            <!-- <label for="password" class="form__input-label">password</label> -->
+            <!-- <input type="password" name="password" placeholder="type here..." class="form__input"> -->
+            {{ sign_up_form.password.label(class="form__input-label") }}
+            {{ sign_up_form.password(
+                class="form__input", 
+                placeholder="type here..."
+              ) }}
+            
+            {% for error in sign_up_form.password.errors %}
+              <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+          </div>
+          <div class="form__row">
+            <!-- <label for="password" class="form__input-label">repeat password</label> -->
+            <!-- <input type="password" name="password" placeholder="type here..." class="form__input"> -->
+            {{ sign_up_form.password_again.label(class="form__input-label") }}
+            {{ sign_up_form.password_again(
+                class="form__input", 
+                placeholder="type here..."
+              ) }}
+            
+            {% for error in sign_up_form.password_again.errors %}
+              <span style="color: red;">{{ error }}</span>
+            {% endfor %}
           </div>
   
-          <input type="submit" class="form__submit" value="Continue">
+          <!-- <input type="submit" class="form__submit" value="Continue"> -->
+          {{ sign_up_form.submit(class="form__submit") }}
         </form>
       </div>
     </div>
