@@ -10,4 +10,8 @@ def root():
 @app.route("/feed")
 def feed():
     return render_template("feed.html")
-    # return "123"
+
+
+@app.route("/sign-up-in")
+def test():
+    return render_template("sign-up-in.html")
