@@ -15,7 +15,9 @@
       -ms-flex-align: center;
           align-items: center;
   height: 100%;
+  width: 100%;
   padding-left: 20px;
+  padding-right: 7px;
   background: rgba(191, 191, 191, 0.5);
   -webkit-backdrop-filter: blur(15px);
           backdrop-filter: blur(15px);
@@ -37,7 +39,7 @@
   background-size: 200% auto;
   color: #000;
   background-clip: text;
-  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-animation: gradient_animation 7s linear infinite;
@@ -145,6 +147,101 @@
   -webkit-box-shadow: inset 0 0 5px #000;
   box-shadow: inset 0 0 5px #000;
   background-color: #404040;
+}
+
+.user-block {
+  margin-left: auto;
+  width: 320px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.user-block .feed-switcher {
+  width: 55%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+
+.user-block .feed-switcher a {
+  text-decoration: none;
+  font-family: 'Oxanium';
+  font-size: 20px;
+  color: #000;
+}
+
+.user-block .feed-switcher a.current-feed {
+  color: #8C43EA;
+  font-size: 23px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.user-block .notifications {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 21%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.user-block .notifications > div {
+  position: relative;
+}
+
+.user-block .notifications > div .material-icons-outlined {
+  cursor: pointer;
+  font-size: 30px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.user-block .notifications .notifications__counter {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  top: -7px;
+  right: -5px;
+  z-index: 2;
+  background-color: #8C43EA;
+  border-radius: 50%;
+  color: #fff;
+  font-family: 'Oxanium';
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.user-block .user__avatar {
+  width: 50px;
+  height: 50px;
 }
 
 .feed {
