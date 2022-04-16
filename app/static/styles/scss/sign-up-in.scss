@@ -101,6 +101,10 @@ body {
   transition: color 0.1s linear;
   transition-delay: 0.1s;
   z-index: 1;
+
+  &:hover {
+    color: #fff;
+  }
 }
 
 

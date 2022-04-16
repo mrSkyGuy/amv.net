@@ -105,6 +105,10 @@ body {
   z-index: 1;
 }
 
+.button-sign:hover {
+  color: #fff;
+}
+
 .main {
   overflow: hidden;
   position: relative;
