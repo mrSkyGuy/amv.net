@@ -25,7 +25,7 @@
 <body>
   <header class="header">
     <div class="header__container">
-      <a class="domen" href="#">
+      <a class="domen" href="{{ url_for('feed') }}">
         <div class="domen__item">
           <span class="domen-2lvl">amv</span><span class="domen-1lvl">.net</span>
         </div>
@@ -35,8 +35,8 @@
         <input type="text" class="search__field" placeholder="attack on titan">
       </div>
       <div class="button-sign__group">
-        <a class="button-sign" href="/sign-up-in">Sign up</a>
-        <a class="button-sign" href="/sign-up-in">Sign in</a>
+        <a class="button-sign" href="{{ url_for('sign_up_in') }}">Sign up</a>
+        <a class="button-sign" href="{{ url_for('sign_up_in') }}">Sign in</a>
       </div>
     </div>
   </header>
