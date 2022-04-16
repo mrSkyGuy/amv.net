@@ -113,6 +113,8 @@
 }
 
 .button-sign {
+  display: flex;
+
   min-width: 150px;
   height: 34px;
 
@@ -122,11 +124,12 @@
   font-family: 'Oxanium';
   font-size: 23px;
   
-  text-align: center;
-  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
   margin-right: 10px;
   
   color: #fff;
+  text-decoration: none;
   background: #505050;
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
