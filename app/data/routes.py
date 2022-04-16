@@ -24,7 +24,12 @@ def sign_up_in():
     sign_in_form = SignInForm()
 
     session = create_session()
-    if sign_up_form.validate_on_submit():
+    # if sign_up_form.validate_on_submit():
+    if sign_up_form.submit_sign_up.data and sign_up_form.validate():
+        # Из-за того, что на странице 2 формы нужно использовать такую проверку сабмита. 
+        # Чтобы при нажатии на один сабмит, второй не сработал и не провил свою форму 
+        # на валидацию
+        
         user = User(username=sign_up_form.username.data, email=sign_up_form.email.data)
         user.set_password(sign_up_form.password.data)
         session.add(user)
@@ -32,7 +37,8 @@ def sign_up_in():
 
         return redirect(url_for("feed"))
 
-    if sign_in_form.validate_on_submit():
+    # if sign_in_form.validate_on_submit():
+    if sign_in_form.submit_sign_in.data and sign_in_form.validate():  
         if "@" in sign_in_form.username_or_email.data:
             user = (
                 session.query(User)
