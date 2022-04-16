@@ -201,6 +201,19 @@ body {
   }
 }
 
+.form-check-input {
+  transition: .4s;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+
+  &:checked {
+    background: #8C43EA;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+
 .form__submit {
   align-self: end;
 

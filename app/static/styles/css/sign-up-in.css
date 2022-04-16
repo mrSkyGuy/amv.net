@@ -219,6 +219,22 @@ body {
           box-shadow: 0px 0px 5px 2px rgba(51, 51, 51, 0.5);
 }
 
+.form-check-input {
+  -webkit-transition: .4s;
+  transition: .4s;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.form-check-input:checked {
+  background: #8C43EA;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.form-check-input:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .form__submit {
   -ms-flex-item-align: end;
       -ms-grid-row-align: end;
