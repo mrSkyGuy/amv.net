@@ -1,3 +1,4 @@
+from email.policy import default
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlalchemy
@@ -18,6 +19,8 @@ class User(SqlAlchemyBase, UserMixin):
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     videos = sqlalchemy.orm.relation("Video", back_populates="author")
+    notifications_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    messages_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
