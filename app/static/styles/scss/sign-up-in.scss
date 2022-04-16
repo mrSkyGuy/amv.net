@@ -122,7 +122,7 @@ body {
   justify-content: space-around;
   align-items: center; 
 
-  transition: transform 1s cubic-bezier(0.17, 0.8, 0.33, 0.99)/*cubic-bezier(0.17, 0.8, 0.33, 0.99)*/;
+  transition: transform 1s cubic-bezier(0.17, 0.8, 0.33, 0.99);
 }
 
 .sign-up {
@@ -174,8 +174,8 @@ body {
   flex-direction: column;
 }
 
-.form__row:nth-child(-n + 2) {  // Количество инпутов - 1
-  margin-bottom: 7px;
+.form__row {
+  margin-bottom: 5px;
 }
 
 .form__input-label {
