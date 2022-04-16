@@ -5,11 +5,20 @@ const pages = [
     document.querySelector('.sign-in')
 ]
 
+document.addEventListener('DOMContentLoaded', () => {
+        const selectedTab = document.querySelector(".selected-tab")
+        const indicatorWidth = getComputedStyle(indicator).getPropertyValue('width')
+        const tabIndex = Array.prototype.indexOf.call(
+            selectedTab.parentNode.children, selectedTab
+        )
+        indicator.style.transform = `translateX(calc( ${indicatorWidth} * ${tabIndex} + ${10 / 2 * tabIndex}px))`
+    }, {once: true}
+)
 
 tabs.forEach(tab => tab.addEventListener('click', e => {
     const tab = e.target
-    const tabIndex = Array.prototype.indexOf.call(tab.parentNode.children, tab)
     const indicatorWidth = getComputedStyle(indicator).getPropertyValue('width')
+    const tabIndex = Array.prototype.indexOf.call(tab.parentNode.children, tab)
     
     if (tabIndex == 0) {
         pages[0].classList.add('current-page')
