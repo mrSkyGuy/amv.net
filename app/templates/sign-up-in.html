@@ -32,15 +32,15 @@
       </a>
 
       <div class="sign-buttons">
-        <a class="button-sign" href="javascript:void(0);">Sign up</a>
-        <a class="button-sign" href="javascript:void(0);">Sign in</a>
+        <a class="button-sign {% if which_sign == 'up' %} selected-tab {% endif %}" href="javascript:void(0);">Sign up</a>
+        <a class="button-sign {% if which_sign == 'in' %} selected-tab {% endif %}" href="javascript:void(0);">Sign in</a>
         <div class="selected-tab-indicator"></div>
       </div>
     </div>
   </header>
 
   <main class="main">
-    <div class="sign-up current-page">
+    <div class="sign-up {% if which_sign == 'up' %} current-page {% endif %}">
       <div class="sign-up-in__description">
         <div class="sign-up-in__description_header">Here you can register.</div>
   
@@ -119,7 +119,7 @@
         </form>
       </div>
     </div>
-    <div class="sign-in">
+    <div class="sign-in {% if which_sign == 'in' %} current-page {% endif %}">
       <div class="sign-up-in__description">
         <div class="sign-up-in__description_header">Hey. We are glad to have you back.</div> 
           <div class="sign-up-in__description_text">

@@ -56,8 +56,8 @@
         </div>
       {% else %}
         <div class="button-sign__group">
-          <a class="button-sign" href="{{ url_for('sign_up_in') }}">Sign up</a>
-          <a class="button-sign" href="{{ url_for('sign_up_in') }}">Sign in</a>
+          <a class="button-sign" href="{{ url_for('sign_up_in') + '?sign=up' }}">Sign up</a>
+          <a class="button-sign" href="{{ url_for('sign_up_in') + '?sign=in' }}">Sign in</a>
         </div>
       {% endif %}
     </div>
