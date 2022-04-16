@@ -8,7 +8,7 @@ class Video(SqlAlchemyBase):
     __tablename__ = "videos"
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    video_path = sqlalchemy.Column(sqlalchemy.String)
+    video_path = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
-    author_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
+    author_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"), nullable=False)
     author = orm.relation("User")

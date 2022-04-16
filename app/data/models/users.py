@@ -11,11 +11,11 @@ class User(SqlAlchemyBase, UserMixin):
     __tablename__ = "users"
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    username = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
-    avatar_image = sqlalchemy.Column(sqlalchemy.String, default="avatar.png")
+    username = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True, nullable=False)
+    avatar_image = sqlalchemy.Column(sqlalchemy.String, default="avatar.png", nullable=False)
     email = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
     phone = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
-    hashed_password = sqlalchemy.Column(sqlalchemy.String)
+    hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     videos = sqlalchemy.orm.relation("Video", back_populates="author")
