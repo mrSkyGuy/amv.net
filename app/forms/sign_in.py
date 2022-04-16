@@ -15,7 +15,7 @@ class SignInForm(FlaskForm):
     )
     remember_me = BooleanField("remember me")
 
-    submit = SubmitField("Continue")
+    submit_sign_in = SubmitField("Continue")
 
     def validate_username_or_email(self, username_or_email):
         is_email = False
@@ -33,3 +33,5 @@ class SignInForm(FlaskForm):
             if not user:
                 raise ValidationError("User not found")
         
+        if not user.check_password(self.password.data):
+            raise ValidationError("Invalid password")

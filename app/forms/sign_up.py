@@ -43,7 +43,7 @@ class SignUpForm(FlaskForm):
         ],
     )
 
-    submit = SubmitField("Continue")
+    submit_sign_up = SubmitField("Continue")
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)

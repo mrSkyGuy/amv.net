@@ -58,7 +58,7 @@
       <div class="sign-up-in__form">
         <div class="sign-up-in__form-header">Base info</div>
   
-        <form action="#" class="form" method="post" novalidate>
+        <form action="" class="form" method="post" novalidate>
           {{ sign_up_form.csrf_token }}
 
           <div class="form__row">
@@ -115,7 +115,7 @@
           </div>
   
           <!-- <input type="submit" class="form__submit" value="Continue"> -->
-          {{ sign_up_form.submit(class="form__submit") }}
+          {{ sign_up_form.submit_sign_up(class="form__submit") }}
         </form>
       </div>
     </div>
@@ -129,7 +129,7 @@
         <div class="sign-up-in__form">
           <div class="sign-up-in__form-header">Authentication</div>
     
-          <form action="#" class="form" method="post">
+          <form action="" class="form" method="post">
             {{ sign_in_form.csrf_token }}
 
             <div class="form__row">
@@ -166,7 +166,7 @@
             </div>
     
             <!-- <input type="submit" class="form__submit" value="Continue"> -->
-            {{ sign_in_form.submit(class="form__submit") }}
+            {{ sign_in_form.submit_sign_in(class="form__submit") }}
           </form>
         </div>
     </div>
