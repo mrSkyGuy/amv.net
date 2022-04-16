@@ -1,6 +1,7 @@
-from flask import redirect, render_template, url_for
+from flask import redirect, render_template, url_for, request
+from flask_login import login_user
 
-from main import app, login_user
+from main import app
 from data.db_session import create_session
 from data.models.users import User
 from forms.sign_in import SignInForm
@@ -24,10 +25,7 @@ def sign_up_in():
 
     session = create_session()
     if sign_up_form.validate_on_submit():
-        user = User(
-            username=sign_up_form.username.data,
-            email=sign_up_form.email.data
-        )
+        user = User(username=sign_up_form.username.data, email=sign_up_form.email.data)
         user.set_password(sign_up_form.password.data)
         session.add(user)
         session.commit()
@@ -35,15 +33,26 @@ def sign_up_in():
         return redirect(url_for("feed"))
 
     if sign_in_form.validate_on_submit():
-        if '@' in sign_in_form.username_or_email.data:
-            user = session.query(User).filter(User.email == sign_in_form.username_or_email.data).first()
+        if "@" in sign_in_form.username_or_email.data:
+            user = (
+                session.query(User)
+                .filter(User.email == sign_in_form.username_or_email.data)
+                .first()
+            )
         else:
-            user = session.query(User).filter(User.username == sign_in_form.username_or_email.data).first()
+            user = (
+                session.query(User)
+                .filter(User.username == sign_in_form.username_or_email.data)
+                .first()
+            )
 
         if user.check_password(sign_in_form.password.data):
             login_user(user, remember=sign_in_form.remember_me.data)
             return redirect(url_for("feed"))
-        
+
     return render_template(
-        "sign-up-in.html", sign_up_form=sign_up_form, sign_in_form=sign_in_form
+        "sign-up-in.html",
+        sign_up_form=sign_up_form,
+        sign_in_form=sign_in_form,
+        which_sign=request.args.get("sign", "up", str),
     )
