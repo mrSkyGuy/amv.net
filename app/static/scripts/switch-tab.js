@@ -21,9 +21,12 @@ tabs.forEach(tab => tab.addEventListener('click', e => {
     const tabIndex = Array.prototype.indexOf.call(tab.parentNode.children, tab)
     
     if (tabIndex == 0) {
+        // window.location.href = `http://"${window.location.domain}"/sign_up_in?sign=up`;
+        window.history.replaceState({}, '', '/sign_up_in?sign=up')
         pages[0].classList.add('current-page')
         pages[1].classList.remove('current-page')
     } else if (tabIndex == 1) {
+        window.history.replaceState({}, '', '/sign_up_in?sign=in')
         pages[1].classList.add('current-page')
         pages[0].classList.remove('current-page')
     }
