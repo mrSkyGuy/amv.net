@@ -50,7 +50,7 @@
               <span class="material-icons-outlined">forum</span>
             </div>
           </div>
-          <a href="#" class="user">
+          <a href="#" class="user" title="{{ current_user.username }}">
             <img src="../static/img/{{ current_user.avatar_image }}" alt="" class="user__avatar">
           </a>
         </div>
@@ -78,9 +78,25 @@
     </div>
 
     <div class="current-video">
-      <div class="current-video__video">
-        <video src="../static/video/video1.mp4" muted="muted" class="current-video__content" autoplay loop></video>
-        <!-- <img src="../static/img/current_video_preview.jpg" class="current-video__content"> -->
+      <div class="video-player">
+        <video src="../static/video/video1.mp4" poster="../static/img/current_video_preview.jpg" class="video__content" 
+            preload="auto" loop></video>
+        <div class="video-controls">
+          <div class="video-controls__progress-bar">
+            <div class="video-controls__progress-bar-filled"></div>
+          </div>
+
+          <button class="video-controls__play-button" title="Play">
+            <span class="material-icons-outlined">pause_circle</span>
+          </button>
+          
+          <span class="material-icons-outlined volume-icon">volume_up</span>
+          <input type="range" class="video-controls__volume-range" min="0" max="1" step="0.01" value="0.75">
+          
+          <div class="video-controls__time">
+            <span class="time__current-time">0:00</span> / <span class="time__duration">0:00</span>
+          </div>
+        </div>
       </div>
       <div class="current-video__options">
         <div class="current-video__info">
@@ -176,5 +192,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="../static/scripts/like-button.js"></script>
   <script src="../static/scripts/hide-counters.js"></script>
+  <script src="../static/scripts/video-control.js"></script>
 </body>
 </html>
