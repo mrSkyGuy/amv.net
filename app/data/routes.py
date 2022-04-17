@@ -35,7 +35,7 @@ def sign_up_in():
         session.add(user)
         session.commit()
 
-        return redirect(url_for("feed"))
+        return redirect(url_for("sign_up_in") + "?sign=in")
 
     # if sign_in_form.validate_on_submit():
     if sign_in_form.submit_sign_in.data and sign_in_form.validate():  
