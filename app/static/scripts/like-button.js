@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    $('.like-button').click(function(){
+$(document).ready(function() {
+    $('.lcssd__like').click(function() {
         $(this).toggleClass('is-active');
     })
 })

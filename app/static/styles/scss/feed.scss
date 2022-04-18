@@ -221,18 +221,45 @@ span[class ^= "material-icons"] {
   font-size: 25px;
 }
 
-.like-button {
-  position: relative;
+.button {
+  border: none;
+  border-radius: 50%;
+  margin-bottom: 7.5%;
+  
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $light-purple;
+    transition: .2s;
+
+    -webkit-box-shadow: 0 0 5px #606060;
+            box-shadow: 0 0 5px #606060;
+  } 
+  &:not(:hover) {
+    background-color: $grey;
+    transition: .2s;
+  }
+  &:active {
+    background-color: $purple;
+  }
+}
+
+.lcssd__like {
+  position: relative;
   background: #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
   overflow: hidden;
+  border: none;
+  border-radius: 50%;
   margin-bottom: 7.5%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 
   .like-overlay {
     display: block;
@@ -279,13 +306,13 @@ span[class ^= "material-icons"] {
 
   &:hover {
     background-color: $light-purple;
-    transition: .4s;
+    transition: .2s;
 
     -webkit-box-shadow: 0 0 5px #606060;
             box-shadow: 0 0 5px #606060;
   } &:not(:hover) {
     background-color: #ccc;
-    transition: .4s;
+    transition: .2s;
   }
 }
 
@@ -311,33 +338,6 @@ span[class ^= "material-icons"] {
     animation-duration: 0.6s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-}
-
-.button {
-  border: none;
-  border-radius: 50%;
-  
-  width: 40px;
-  height: 40px;
-  padding-top: 6px;
-  margin-bottom: 7.5%;
-  
-  cursor: pointer;
-  
-  &:hover {
-    background-color: $light-purple;
-    transition: .2s;
-
-    -webkit-box-shadow: 0 0 5px #606060;
-            box-shadow: 0 0 5px #606060;
-  } 
-  &:not(:hover) {
-    background-color: $grey;
-    transition: .2s;
-  }
-  &:active {
-    background-color: $purple;
-  }
 }
 
 .current-video__lcssd_hidden {
@@ -403,7 +403,10 @@ span[class ^= "material-icons"] {
 
 /* Переключатели видео (switch) */
 .switch {
-  text-decoration: none;
+  border: none;
+  background: transparent;
+  border-radius: none;
+  cursor: pointer;
   
   span {
     font-size: 27px;

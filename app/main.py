@@ -19,6 +19,7 @@ def load_user(user_id):
 
 
 from data.routes import *
+from data.ajax.routes import *
 
 
 def main():
