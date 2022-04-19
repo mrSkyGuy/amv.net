@@ -19,6 +19,7 @@ class User(SqlAlchemyBase, UserMixin):
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     videos = sqlalchemy.orm.relation("Video", back_populates="author")
+    subscribers_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     notifications_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     messages_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
