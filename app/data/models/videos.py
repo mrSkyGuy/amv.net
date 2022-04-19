@@ -2,9 +2,10 @@ from datetime import datetime
 import sqlalchemy
 import sqlalchemy.orm as orm
 from ..db_session import SqlAlchemyBase
+from sqlalchemy_serializer import SerializerMixin
 
 
-class Video(SqlAlchemyBase):
+class Video(SqlAlchemyBase, SerializerMixin):
     __tablename__ = "videos"
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)

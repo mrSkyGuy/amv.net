@@ -3,7 +3,6 @@ from flask_login import LoginManager
 
 from data import db_session
 from data.models.users import User
-from data.models.videos import Video
 import config
 
 app = Flask(__name__)
@@ -11,6 +10,8 @@ app.config["SECRET_KEY"] = config.SECRET_KEY
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+db_session.global_init("db/db.sqlite")
 
 
 @login_manager.user_loader
@@ -24,7 +25,6 @@ from data.ajax.routes import *
 
 
 def main():
-    db_session.global_init("db/db.sqlite")
     app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG_MODE)
 
 

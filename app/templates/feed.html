@@ -51,7 +51,7 @@
             </div>
           </div>
           <a href="#" class="user" title="{{ current_user.username }}">
-            <img src="../static/img/{{ current_user.avatar_image }}" alt="" class="user__avatar">
+            <img src="../static/avatars/{{ current_user.avatar_image }}" alt="" class="user__avatar">
           </a>
         </div>
       {% else %}
@@ -79,8 +79,8 @@
 
     <div class="current-video">
       <div class="video-player">
-        <video src="../static/video/video1.mp4" poster="../static/img/current_video_preview.jpg" class="video__content" 
-            preload="auto" loop></video>
+        <video src="../static/video/video1.mp4" poster="../static/previews/video1_preview.png" class="video__content" 
+            preload="auto" loop autoplay></video>
         <div class="video-controls">
           <div class="video-controls__progress-bar">
             <div class="video-controls__progress-bar-filled"></div>
@@ -91,7 +91,7 @@
           </button>
           
           <span class="material-icons-outlined volume-icon">volume_up</span>
-          <input type="range" class="video-controls__volume-range" min="0" max="1" step="0.01" value="0.75">
+          <input type="range" class="video-controls__volume-range" min="0" max="1" step="0.01" value="0.5">
           
           <div class="video-controls__time">
             <span class="time__current-time">0:00</span> / <span class="time__duration">0:00</span>
@@ -102,7 +102,7 @@
         <div class="current-video__info">
           <div class="current-video__author">
             <div class="author__info">
-              <img src="../static/img/avatar.png" alt="" class="author__avatar">
+              <img src="../static/avatars/avatar.png" alt="" class="author__avatar">
               <span class="author__nickname">SkyGuy</span>
             </div>
             <div class="author__subscribers">
