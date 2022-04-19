@@ -19,3 +19,44 @@ class Video(SqlAlchemyBase):
 
     author_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"), nullable=False)
     author = orm.relation("User")
+
+
+""" 
+    session = create_session()
+    video1 = Video(
+        video_path="video1.mp4",
+        preview_path="video1_preview.png",
+        description="Killua and Gon are my favorites #killua #gon #hxh",
+        author=session.query(User).get(1)
+    )
+    session.add(video1)
+    video2 = Video(
+        video_path="video2.mp4",
+        preview_path="video2_preview.png",
+        description="Wooooow #fire",
+        author=session.query(User).get(1)
+    )
+    session.add(video2)
+    video3 = Video(
+        video_path="video3.mp4",
+        preview_path="video3_preview.png",
+        description="Jujutsu kaisen the best #jujutsukaisen",
+        author=session.query(User).get(1)
+    )
+    session.add(video3)
+    video4 = Video(
+        video_path="video4.mp4",
+        preview_path="video4_preview.png",
+        description="No comments #naruto #sasuke",
+        author=session.query(User).get(1)
+    )
+    session.add(video4)
+    video5 = Video(
+        video_path="video5.mp4",
+        preview_path="video5_preview.png",
+        description="The most thrilling moment #deathnote #light #l",
+        author=session.query(User).get(1)
+    )
+    session.add(video5)
+    session.commit()
+"""

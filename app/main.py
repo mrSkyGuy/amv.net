@@ -3,6 +3,7 @@ from flask_login import LoginManager
 
 from data import db_session
 from data.models.users import User
+from data.models.videos import Video
 import config
 
 app = Flask(__name__)
@@ -25,6 +26,7 @@ from data.ajax.routes import *
 def main():
     db_session.global_init("db/db.sqlite")
     app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG_MODE)
+
 
 if __name__ == "__main__":
     main()
