@@ -62,7 +62,7 @@ nextVideoSwitchButton.addEventListener("click", e => {
             previousVideo.style.opacity = 1
         }
 
-        currentVideoContent.setAttribute("src", `../static/video/${data["video_path"]}`)
+        currentVideoContent.setAttribute("src", `../static/videos/${data["video_path"]}`)
         currentVideoContent.setAttribute("poster", `../static/previews/${data["preview_path"]}`)
 
         currentVideoAuthorAvatar.setAttribute("src", `../static/avatars/${data["author_avatar_path"]}`)
@@ -108,7 +108,7 @@ previousVideoSwitchButton.addEventListener("click", e => {
             previousVideo.style.opacity = 1
         }
 
-        currentVideoContent.setAttribute("src", `../static/video/${data["video_path"]}`)
+        currentVideoContent.setAttribute("src", `../static/videos/${data["video_path"]}`)
         currentVideoContent.setAttribute("poster", `../static/previews/${data["preview_path"]}`)
 
         currentVideoAuthorAvatar.setAttribute("src", `../static/avatars/${data["author_avatar_path"]}`)
