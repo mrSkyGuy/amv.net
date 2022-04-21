@@ -14,7 +14,9 @@ const currentVideo = document.querySelector(".current-video"),
       currentVideoDescription = currentVideo.querySelector(".current-video__description p")
 
 const nextVideoContent = document.querySelector(".next-video .next-video__content"),
-      previousVideoContent = document.querySelector(".previous-video .previous-video__content")
+      previousVideoContent = document.querySelector(".previous-video .previous-video__content"),
+      previousVideo = document.querySelector(".previous-video"),
+      previousVideoSwitch = previousVideoSwitchButton.querySelector(".switch")
 
 
 function sendRequest(method, url, body = null) {
@@ -49,8 +51,19 @@ nextVideoSwitchButton.addEventListener("click", e => {
         "post", "/ajax/get_next_video", {switch: true}
     )
     requestForSwitchCurrentVideo.then(data => {
+        if (data["is_start"]) {
+            previousVideoSwitchButton.style.opacity = 0
+            previousVideoSwitch.style.cursor = 'default'
+            previousVideo.style.opacity = 0
+            reject()
+        } else {
+            previousVideoSwitchButton.style.opacity = 1
+            previousVideoSwitch.style.cursor = 'pointer'
+            previousVideo.style.opacity = 1
+        }
+
         currentVideoContent.setAttribute("src", `../static/video/${data["video_path"]}`)
-        currentVideoContent.setAttribute("poster", `../static/video/${data["preview_path"]}`)
+        currentVideoContent.setAttribute("poster", `../static/previews/${data["preview_path"]}`)
 
         currentVideoAuthorAvatar.setAttribute("src", `../static/avatars/${data["author_avatar_path"]}`)
         currentVideoAuthorNickname.textContent = data["author_username"]
@@ -84,8 +97,19 @@ previousVideoSwitchButton.addEventListener("click", e => {
         "post", "/ajax/get_previous_video", {switch: true}
     )
     requestForSwitchCurrentVideo.then(data => {
+        if (data["is_start"]) {
+            previousVideoSwitchButton.style.opacity = 0
+            previousVideoSwitch.style.cursor = 'default'
+            previousVideo.style.opacity = 0
+            reject()
+        } else {
+            previousVideoSwitchButton.style.opacity = 1
+            previousVideoSwitch.style.cursor = 'pointer'
+            previousVideo.style.opacity = 1
+        }
+
         currentVideoContent.setAttribute("src", `../static/video/${data["video_path"]}`)
-        currentVideoContent.setAttribute("poster", `../static/video/${data["preview_path"]}`)
+        currentVideoContent.setAttribute("poster", `../static/previews/${data["preview_path"]}`)
 
         currentVideoAuthorAvatar.setAttribute("src", `../static/avatars/${data["author_avatar_path"]}`)
         currentVideoAuthorNickname.textContent = data["author_username"]
@@ -109,6 +133,17 @@ previousVideoSwitchButton.addEventListener("click", e => {
             "post", "/ajax/get_previous_video", {switch: false}
         )
         requestForGetPreviousVideoPreview.then(data => {
+            if (data["is_start"]) {
+                previousVideoSwitchButton.style.opacity = 0
+                previousVideoSwitch.style.cursor = 'default'
+                previousVideo.style.opacity = 0
+                reject()
+            } else {
+                previousVideoSwitchButton.style.opacity = 1
+                previousVideoSwitch.style.cursor = 'pointer'
+                previousVideo.style.opacity = 1
+            }
+
             previousVideoContent.setAttribute("src", `../static/previews/${data["preview_path"]}`)
         })
     })
