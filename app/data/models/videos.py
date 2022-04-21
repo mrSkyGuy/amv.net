@@ -18,8 +18,13 @@ class Video(SqlAlchemyBase, SerializerMixin):
     comments_count = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
     video_created = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
-    author_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"), nullable=False)
+    author_id = sqlalchemy.Column(
+        sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"), nullable=False
+    )
     author = orm.relation("User")
+
+    def __repr__(self):
+        return f"Video <id: {self.id}, video_path: {self.video_path}>"
 
 
 """ 
