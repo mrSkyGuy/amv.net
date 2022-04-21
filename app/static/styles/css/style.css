@@ -412,6 +412,14 @@
   font-family: 'Oxanium';
 }
 
+.video-controls__time .time__current-time {
+  margin-right: 3px;
+}
+
+.video-controls__time .time__duration {
+  margin-left: 3px;
+}
+
 .video-player:hover .video-controls {
   -webkit-transform: translateY(0);
           transform: translateY(0);
@@ -523,11 +531,35 @@ span[class^="material-icons"] {
   font-size: 25px;
 }
 
-.like-button {
-  position: relative;
+.button {
+  border: none;
+  border-radius: 50%;
+  margin-bottom: 7.5%;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #b387eb;
+  -webkit-transition: .2s;
+  transition: .2s;
+  -webkit-box-shadow: 0 0 5px #606060;
+  box-shadow: 0 0 5px #606060;
+}
+
+.button:not(:hover) {
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.button:active {
+  background-color: #8C43EA;
+}
+
+.lcssd__like {
+  position: relative;
   background: #ccc;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -538,12 +570,16 @@ span[class^="material-icons"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  text-decoration: none;
   overflow: hidden;
+  border: none;
+  border-radius: 50%;
   margin-bottom: 7.5%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 
-.like-button .like-overlay {
+.lcssd__like .like-overlay {
   display: block;
   position: absolute;
   top: 0;
@@ -559,45 +595,45 @@ span[class^="material-icons"] {
   z-index: 0;
 }
 
-.like-button span.not-liked {
+.lcssd__like span.not-liked {
   display: block;
   color: #fff;
   position: relative;
   z-index: 1;
 }
 
-.like-button span.is-liked {
+.lcssd__like span.is-liked {
   display: none;
   color: #fff;
   position: relative;
   z-index: 1;
 }
 
-.like-button.is-active .like-overlay {
+.lcssd__like.is-active .like-overlay {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
 
-.like-button.is-active span.not-liked {
+.lcssd__like.is-active span.not-liked {
   display: none;
 }
 
-.like-button.is-active span.is-liked {
+.lcssd__like.is-active span.is-liked {
   display: block;
 }
 
-.like-button:hover {
+.lcssd__like:hover {
   background-color: #b387eb;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .2s;
+  transition: .2s;
   -webkit-box-shadow: 0 0 5px #606060;
   box-shadow: 0 0 5px #606060;
 }
 
-.like-button:not(:hover) {
+.lcssd__like:not(:hover) {
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .2s;
+  transition: .2s;
 }
 
 @-webkit-keyframes bouncy {
@@ -641,34 +677,6 @@ span[class^="material-icons"] {
   animation-duration: 0.6s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-}
-
-.button {
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  padding-top: 6px;
-  margin-bottom: 7.5%;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #b387eb;
-  -webkit-transition: .2s;
-  transition: .2s;
-  -webkit-box-shadow: 0 0 5px #606060;
-  box-shadow: 0 0 5px #606060;
-}
-
-.button:not(:hover) {
-  background-color: #ccc;
-  -webkit-transition: .2s;
-  transition: .2s;
-}
-
-.button:active {
-  background-color: #8C43EA;
 }
 
 .current-video__lcssd_hidden {

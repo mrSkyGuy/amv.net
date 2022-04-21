@@ -140,6 +140,12 @@ $progress-bar-height: 3.5px;
   color: white;
   font-size: 1em;
   font-family: 'Oxanium';
+
+  .time__current-time {
+    margin-right: 3px;
+  } .time__duration {
+    margin-left: 3px;
+  }
 }
 
 

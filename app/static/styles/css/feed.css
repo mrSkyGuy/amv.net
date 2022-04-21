@@ -158,6 +158,14 @@
   font-family: 'Oxanium';
 }
 
+.video-controls__time .time__current-time {
+  margin-right: 3px;
+}
+
+.video-controls__time .time__duration {
+  margin-left: 3px;
+}
+
 .video-player:hover .video-controls {
   -webkit-transform: translateY(0);
           transform: translateY(0);
