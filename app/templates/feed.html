@@ -64,22 +64,40 @@
   </header>
 
   <main class="feed">
-    <div class="previous-video">
-      <div class="blur"></div>
-      <div class="previous-video__preview">
-        <img src="../static/img/pervious_video_preview.jpg" class="previous-video__content">
+    {% if not (previous_video_preview_path == 'None') %}
+      <div class="previous-video">
+        <div class="blur"></div>
+        <div class="previous-video__preview">
+          <img src="../static/previews/{{ previous_video_preview_path }}" class="previous-video__content">
+        </div>
       </div>
-    </div>
+    {% else %}
+      <div class="previous-video" style="opacity: 0">
+        <div class="blur"></div>
+        <div class="previous-video__preview">
+          <img src="" class="previous-video__content">
+        </div>
+      </div>
+    {% endif %}
     
-    <div class="previous-video-switch">
-      <button class="switch">
-        <span class="material-icons-outlined">chevron_left</span>
-      </button>
-    </div>
+    {% if not (previous_video_preview_path == 'None') %}
+      <div class="previous-video-switch">
+        <button class="switch">
+          <span class="material-icons-outlined">chevron_left</span>
+        </button>
+      </div>
+    {% else %}
+      <div class="previous-video-switch" style="opacity: 0;">
+        <button class="switch" style="cursor: default">
+          <span class="material-icons-outlined">chevron_left</span>
+        </button>
+      </div>
+    {% endif %}
+    
 
     <div class="current-video">
       <div class="video-player">
-        <video src="../static/video/video1.mp4" poster="../static/previews/video1_preview.png" class="video__content" 
+        <video src="../static/video/{{ current_video_content_path }}" poster="../static/previews/{{ current_video_preview_path }}" class="video__content" 
             preload="auto" loop autoplay></video>
         <div class="video-controls">
           <div class="video-controls__progress-bar">
@@ -102,30 +120,30 @@
         <div class="current-video__info">
           <div class="current-video__author">
             <div class="author__info">
-              <img src="../static/avatars/avatar.png" alt="" class="author__avatar">
-              <span class="author__nickname">SkyGuy</span>
+              <img src="../static/avatars/{{ author_avatar_path }}" alt="" class="author__avatar">
+              <span class="author__nickname">{{ author_username }}</span>
             </div>
             <div class="author__subscribers">
               <span class="material-icons-outlined subscribers__icon icon">groups</span>
-              <span class="subscribers__count">1.9m</span>
+              <span class="subscribers__count">{{ author_subscribers_count }}</span>
             </div>
             <div class="author__videos">
               <span class="material-icons-outlined videos__icon icon">video_library</span>
-              <span class="videos__count">11</span>
+              <span class="videos__count">{{ author_videos_count }}</span>
             </div>
           </div>
           <div class="current-video__video-info">
             <div class="video-info__views">
               <span class="material-icons-outlined views__icon icon">visibility</span>
-              <span class="views__count">2.7m</span>
+              <span class="views__count">{{ video_views_count }}</span>
             </div>
             <div class="video-info__likes">
               <span class="material-icons-outlined likes__icon icon">favorite_border</span>
-              <span class="likes__count">776k</span>
+              <span class="likes__count">{{ video_likes_count }}</span>
             </div>
             <div class="video-info__comments">
               <span class="material-icons-outlined comments__icon icon">textsms</span>
-              <span class="comments__count">269</span>
+              <span class="comments__count">{{ video_comments_count }}</span>
             </div>
           </div>
         </div>
@@ -167,7 +185,7 @@
     <div class="next-video">
       <div class="blur"></div>
       <div class="next-video__preview">
-        <img src="../static/img/next_video_preview.jpg" class="next-video__content">
+        <img src="../static/previews/{{ next_video_preview_path }}" class="next-video__content">
       </div>
     </div>
   </main>
