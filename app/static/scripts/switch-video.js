@@ -148,3 +148,12 @@ previousVideoSwitchButton.addEventListener("click", e => {
         })
     })
 })
+
+// Переключение видео нажатием на кнопки-стрелки
+document.addEventListener("keyup", e => {
+    if (e.code == "ArrowRight" ) nextVideoSwitchButton.click()
+})
+
+document.addEventListener("keyup", e => {
+    if (e.code == "ArrowLeft" ) previousVideoSwitchButton.click()
+})
