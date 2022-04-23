@@ -1,12 +1,18 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_restful import Api
 
 from data import db_session
 from data.models.users import User
+from data.api.videos_resource import VideosListResource, VideosResource
 import config
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
+
+api = Api(app)
+api.add_resource(VideosListResource, '/api/videos') 
+api.add_resource(VideosResource, '/api/videos/<int:video_id>')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
