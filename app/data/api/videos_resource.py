@@ -52,13 +52,13 @@ class VideosResource(Resource):
                 "videos_count": len(video.author.videos),
                 "subscribers_count": video.author.subscribers_count,
             },
-            "success": True
+            "success": True,
         }
 
         return jsonify(response)
 
     def post(self, video_id):
-        """ Удаление видео из своего аккаунта """
+        """Удаление видео из своего аккаунта"""
 
         abort_if_item_not_found(video_id, Video)
 
@@ -66,7 +66,9 @@ class VideosResource(Resource):
         session = create_session()
 
         # ---------------------Проверям данные логина на валидность---------------------
-        user = session.query(User).filter(User.username == args_login["username"]).first()
+        user = (
+            session.query(User).filter(User.username == args_login["username"]).first()
+        )
         if not (user is None):
             if not (user.check_password(args_login["password"])):
                 return jsonify({"success": False, "message": "Invalid password"})
@@ -88,29 +90,31 @@ class VideosListResource(Resource):
         session = create_session()
         videos = session.query(Video).all()
 
-        response = [
-            {
-                "video": video.to_dict(
-                    only=(
-                        "id",
-                        "video_path",
-                        "preview_path",
-                        "description",
-                        "views_count",
-                        "likes_count",
-                        "comments_count",
-                        "video_created",
-                    )
-                ),
-                "author": {
-                    "username": video.author.username,
-                    "videos_count": len(video.author.videos),
-                    "subscribers_count": video.author.subscribers_count,
-                },
-                "success": True
-            }
-            for video in videos
-        ]
+        response = {
+            "videos": [
+                {
+                    "video": video.to_dict(
+                        only=(
+                            "id",
+                            "video_path",
+                            "preview_path",
+                            "description",
+                            "views_count",
+                            "likes_count",
+                            "comments_count",
+                            "video_created",
+                        )
+                    ),
+                    "author": {
+                        "username": video.author.username,
+                        "videos_count": len(video.author.videos),
+                        "subscribers_count": video.author.subscribers_count,
+                    },
+                }
+                for video in videos
+            ],
+            "success": True,
+        }
 
         return jsonify(response)
 
@@ -186,6 +190,7 @@ class VideosListResource(Resource):
             + f".{video_file_extension}"
         )
         from os import getcwd
+
         print(getcwd())
         with open(f"static/videos/{video_filename}", "wb") as f:
             f.write(video_file.encode("latin1"))
@@ -229,7 +234,7 @@ class VideosListResource(Resource):
                 },
             }
         )
-    
+
     def __is_harmless_extensions(self, extension, file_type):
         photo_extensions = ["jpg", "png", "jpeg"]
         video_extensions = ["mp4", "webm", "ogv"]
