@@ -10,9 +10,9 @@ from .additional_funcs import abort_if_item_not_found
 
 
 # Парсер аргументов для авторизиции
-parser_login = reqparse.RequestParser()
-parser_login.add_argument("username", required=True)
-parser_login.add_argument("password", required=True)
+parser_signin = reqparse.RequestParser()
+parser_signin.add_argument("username", required=True)
+parser_signin.add_argument("password", required=True)
 
 # Парсер аргументов для загрузки видео
 parser_video = reqparse.RequestParser()
@@ -62,7 +62,7 @@ class VideosResource(Resource):
 
         abort_if_item_not_found(video_id, Video)
 
-        args_login = parser_login.parse_args()  # Аргументы для аутентификации
+        args_login = parser_signin.parse_args()  # Аргументы для аутентификации
         session = create_session()
 
         # ---------------------Проверям данные логина на валидность---------------------
@@ -121,7 +121,7 @@ class VideosListResource(Resource):
     def post(self):
         """Добавление видео в свой аккаунт через API"""
 
-        args_login = parser_login.parse_args()  # Аргументы для аутентификации
+        args_login = parser_signin.parse_args()  # Аргументы для аутентификации
         session = create_session()
 
         # ---------------------Проверям данные логина на валидность---------------------
