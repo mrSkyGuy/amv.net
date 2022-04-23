@@ -57,7 +57,7 @@ class VideosResource(Resource):
 
         return jsonify(response)
 
-    def post(self, video_id):
+    def delete(self, video_id):
         """Удаление видео из своего аккаунта"""
 
         abort_if_item_not_found(video_id, Video)

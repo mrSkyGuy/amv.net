@@ -24,7 +24,7 @@ def get_byte_file(abs_path):
 #         },
 #     )
 # )
-# pprint(requests.post(
+# pprint(requests.delete(
 #     "http://127.0.0.1:8080/api/videos/6",
 #     json={
 #         "username": "SkyGuy",
