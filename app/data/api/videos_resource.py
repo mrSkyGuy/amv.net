@@ -67,9 +67,7 @@ class VideosResource(Resource):
 
         # ---------------------Проверям данные логина на валидность---------------------
         user = (
-            session.query(User)
-            .filter(User.username == args_signin["username"])
-            .first()
+            session.query(User).filter(User.username == args_signin["username"]).first()
         )
         if not (user is None):
             if not (user.check_password(args_signin["password"])):
@@ -133,9 +131,7 @@ class VideosListResource(Resource):
 
         # ---------------------Проверям данные логина на валидность---------------------
         user = (
-            session.query(User)
-            .filter(User.username == args_signin["username"])
-            .first()
+            session.query(User).filter(User.username == args_signin["username"]).first()
         )
         if not (user is None):
             if not (user.check_password(args_signin["password"])):
@@ -168,6 +164,11 @@ class VideosListResource(Resource):
                     "message": f"We are not support the extension: {video_file_extension}",
                 }
             )
+        if not self.__check_size_file(video_file, "video"):
+            return jsonify(
+                {"success": False, "message": "Video size must be less than 15 MB"}
+            )
+
         # Превью
         if preview_file is None:
             # preview_file = generate_preview(f.read())  # Эта функция в будущем
@@ -182,7 +183,7 @@ class VideosListResource(Resource):
                         "message": "Please, give us preview file extension (without dot)",
                     }
                 )
-            elif not self.__is_harmless_extensions(
+            if not self.__is_harmless_extensions(
                 preview_file_extension, file_type="photo"
             ):
                 return jsonify(
@@ -190,6 +191,10 @@ class VideosListResource(Resource):
                         "success": False,
                         "message": f"We are not support the extension: {preview_file_extension}",
                     }
+                )
+            if not self.__check_size_file(preview_file, "photo"):
+                return jsonify(
+                    {"success": False, "message": "Preview file must be less than 2 MB"}
                 )
 
         # Сохраняем данные на сервер
@@ -242,6 +247,7 @@ class VideosListResource(Resource):
         )
 
     def __is_harmless_extensions(self, extension, file_type):
+        """Проверка на то, что файлы поддерживаемых форматов"""
         photo_extensions = ["jpg", "png", "jpeg"]
         video_extensions = ["mp4", "webm", "ogv"]
 
@@ -249,3 +255,11 @@ class VideosListResource(Resource):
             return extension in photo_extensions
         elif file_type.lower() == "video":
             return extension in video_extensions
+
+    def __check_size_file(self, file, file_type):
+        """Проверка на то, что"""
+        max_size = {"video": 15_728_640, "photo": 2_097_152}  # Байт  # Байт
+        size = len(file)
+        if size > max_size[file_type.lower()]:
+            return False
+        return True
