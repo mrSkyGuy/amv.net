@@ -68,7 +68,7 @@ class VideosResource(Resource):
         # ---------------------Проверям данные логина на валидность---------------------
         user = (
             session.query(User)
-            .filter(User.username.lower() == args_signin["username"].lower())
+            .filter(User.username == args_signin["username"])
             .first()
         )
         if not (user is None):
@@ -134,7 +134,7 @@ class VideosListResource(Resource):
         # ---------------------Проверям данные логина на валидность---------------------
         user = (
             session.query(User)
-            .filter(User.username.lower() == args_signin["username"].lower())
+            .filter(User.username == args_signin["username"])
             .first()
         )
         if not (user is None):

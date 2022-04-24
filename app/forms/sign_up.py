@@ -68,7 +68,7 @@ class SignUpForm(FlaskForm):
         if (
             create_session()
             .query(User)
-            .filter(User.username.lower() == username.data.lower())
+            .filter(User.username == username.data)
             .first()
         ):
             raise ValidationError("This username is already taken")

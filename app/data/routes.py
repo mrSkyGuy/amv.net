@@ -47,7 +47,7 @@ def feed():
         previous_video_preview_path=previous_video.preview_path
         if not (previous_video is None)
         else "None",
-        
+
         current_video_content_path=current_video.video_path,
         current_video_preview_path=current_video.preview_path,
         author_avatar_path=current_video.author.avatar_image,
@@ -92,7 +92,7 @@ def sign_up_in():
             user = (
                 sess.query(User)
                 .filter(
-                    User.username.lower() == sign_in_form.username_or_email.data.lower()
+                    User.username == sign_in_form.username_or_email.data
                 )
                 .first()
             )

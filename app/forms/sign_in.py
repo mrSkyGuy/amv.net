@@ -33,7 +33,7 @@ class SignInForm(FlaskForm):
         else:
             user = (
                 session.query(User)
-                .filter(User.username.lower() == username_or_email.data.lower())
+                .filter(User.username == username_or_email.data)
                 .first()
             )
             if not user:
