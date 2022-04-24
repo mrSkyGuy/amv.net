@@ -19,19 +19,25 @@ class SignInForm(FlaskForm):
 
     def validate_username_or_email(self, username_or_email):
         is_email = False
-        if '@' in username_or_email.data:
+        if "@" in username_or_email.data:
             is_email = True
-        
+
         session = create_session()
 
         if is_email:
-            user = session.query(User).filter(User.email == username_or_email.data).first()
+            user = (
+                session.query(User).filter(User.email == username_or_email.data).first()
+            )
             if not user:
                 raise ValidationError("User not found")
         else:
-            user = session.query(User).filter(User.username == username_or_email.data).first()
+            user = (
+                session.query(User)
+                .filter(User.username.lower() == username_or_email.data.lower())
+                .first()
+            )
             if not user:
                 raise ValidationError("User not found")
-        
+
         if not user.check_password(self.password.data):
             raise ValidationError("Invalid password")
