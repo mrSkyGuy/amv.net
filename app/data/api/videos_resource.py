@@ -189,9 +189,6 @@ class VideosListResource(Resource):
             + f"_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
             + f".{video_file_extension}"
         )
-        from os import getcwd
-
-        print(getcwd())
         with open(f"static/videos/{video_filename}", "wb") as f:
             f.write(video_file.encode("latin1"))
 
