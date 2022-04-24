@@ -62,21 +62,28 @@ class VideosResource(Resource):
 
         abort_if_item_not_found(video_id, Video)
 
-        args_login = parser_signin.parse_args()  # Аргументы для аутентификации
+        args_signin = parser_signin.parse_args()  # Аргументы для аутентификации
         session = create_session()
 
         # ---------------------Проверям данные логина на валидность---------------------
         user = (
-            session.query(User).filter(User.username == args_login["username"]).first()
+            session.query(User)
+            .filter(User.username.lower() == args_signin["username"].lower())
+            .first()
         )
         if not (user is None):
-            if not (user.check_password(args_login["password"])):
+            if not (user.check_password(args_signin["password"])):
                 return jsonify({"success": False, "message": "Invalid password"})
         else:
             return jsonify({"success": False, "message": "User not found"})
 
         # Удаляем видео из аккаунта
         video = session.query(Video).get(video_id)
+        if not (video in user.videos):
+            jsonify(
+                {"success": False, "message": "You can't delete someone else's video"}
+            )
+
         session.delete(video)
         session.commit()
 
@@ -121,15 +128,17 @@ class VideosListResource(Resource):
     def post(self):
         """Добавление видео в свой аккаунт через API"""
 
-        args_login = parser_signin.parse_args()  # Аргументы для аутентификации
+        args_signin = parser_signin.parse_args()  # Аргументы для аутентификации
         session = create_session()
 
         # ---------------------Проверям данные логина на валидность---------------------
         user = (
-            session.query(User).filter(User.username == args_login["username"]).first()
+            session.query(User)
+            .filter(User.username.lower() == args_signin["username"].lower())
+            .first()
         )
         if not (user is None):
-            if not (user.check_password(args_login["password"])):
+            if not (user.check_password(args_signin["password"])):
                 return jsonify({"success": False, "message": "Invalid password"})
         else:
             return jsonify({"success": False, "message": "User not found"})
