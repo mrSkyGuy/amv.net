@@ -17,7 +17,7 @@ class SignUpForm(FlaskForm):
                 min=3,
                 max=20,
                 message="Username must be longer than 3 characters "
-                       + "and shorter than 20 characters",
+                + "and shorter than 20 characters",
             ),
         ],
     )
@@ -65,7 +65,12 @@ class SignUpForm(FlaskForm):
                 + "lattin letters, numbers, dots and underlines"
             )
 
-        if create_session().query(User).filter(User.username == username.data).first():
+        if (
+            create_session()
+            .query(User)
+            .filter(User.username.lower() == username.data.lower())
+            .first()
+        ):
             raise ValidationError("This username is already taken")
 
     def validate_email(self, email):
