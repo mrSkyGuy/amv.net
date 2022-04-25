@@ -14,7 +14,7 @@ $margin-for-video-info: 1vh;
   justify-content: space-between;
   align-items: center;
 
-  padding-top: 20vh;
+  // margin-top: 60px;
 }
 
 /* Текущее видео (current) */
@@ -30,7 +30,7 @@ $margin-for-video-info: 1vh;
   border-radius: 15px;
   min-width: 46vw;
   max-width: 60vw;
-  height: 56vh;
+  max-height: 70vh;
   box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.25);
 }
 
@@ -428,5 +428,11 @@ span[class ^= "material-icons"] {
       font-weight: 700;
       color: $purple;
     }
+  }
+  &:focus, &:active {
+    outline: none !important;
+  }
+  &::-moz-focus-inner {
+    border: 0 !important;
   }
 }
