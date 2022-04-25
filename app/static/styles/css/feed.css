@@ -232,6 +232,9 @@
 
 .author__avatar {
   display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 
 .author__nickname {

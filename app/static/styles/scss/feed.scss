@@ -195,6 +195,9 @@ $progress-bar-height: 3.5px;
 }
 .author__avatar {
   display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 .author__nickname {
   font-size: 18px;
