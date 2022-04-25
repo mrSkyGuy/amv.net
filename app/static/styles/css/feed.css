@@ -230,6 +230,11 @@
   margin-bottom: 1vh;
 }
 
+.author__link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .author__avatar {
   display: block;
   width: 60px;

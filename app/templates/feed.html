@@ -121,8 +121,10 @@
         <div class="current-video__info">
           <div class="current-video__author">
             <div class="author__info">
-              <img src="../static/avatars/{{ author_avatar_path }}" alt="" class="author__avatar">
-              <span class="author__nickname">{{ author_username }}</span>
+              <a href="/{{ author_username }}" class="author__link">
+                <img src="../static/avatars/{{ author_avatar_path }}" alt="" class="author__avatar">
+                <span class="author__nickname">{{ author_username }}</span>
+              </a>
             </div>
             <div class="author__subscribers">
               <span class="material-icons-outlined subscribers__icon icon">groups</span>

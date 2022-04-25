@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for, request, session
+from flask import redirect, render_template, url_for, request, session, abort
 from flask_login import login_user
 
 from random import sample
@@ -36,10 +36,10 @@ def feed():
     previous_video = None
     if current_video_index > 0:
         previous_video = videos[
-            feed_videos_indexes[current_video_index - 1 % len(feed_videos_indexes)]
+            feed_videos_indexes[(current_video_index - 1) % len(feed_videos_indexes)]
         ]
     next_video = videos[
-        feed_videos_indexes[current_video_index + 1 % len(feed_videos_indexes)]
+        feed_videos_indexes[(current_video_index + 1) % len(feed_videos_indexes)]
     ]
 
     return render_template(
@@ -51,7 +51,7 @@ def feed():
         current_video_content_path=current_video.video_path,
         current_video_preview_path=current_video.preview_path,
         author_avatar_path=current_video.author.avatar_image,
-        author_nickname=current_video.author.username,
+        author_username=current_video.author.username,
         author_subscribers_count=current_video.author.subscribers_count,
         author_videos_count=len(current_video.author.videos),
         video_views_count=current_video.views_count,
@@ -107,3 +107,13 @@ def sign_up_in():
         sign_in_form=sign_in_form,
         which_sign=request.args.get("sign", "up", str),
     )
+
+
+@app.route("/<username>")
+def users(username):
+    session = create_session()
+    user = session.query(User).filter(User.username == username).first()
+    if user is None:
+        abort(404)
+    
+    return render_template("user.html", user=user, user_videos_count=len(user.videos))

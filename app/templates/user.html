@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Oxanium&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <link rel="stylesheet" href="../static/styles/css/normalize.css">
+  <link rel="stylesheet" href="../static/styles/css/scrollbar.css">
+  <link rel="stylesheet" href="../static/styles/css/user.css">
+
+  <link rel="icon" href="data:;base64,=">
+  <link rel="icon" href="../static/img/favicon.png" type="image/x-icon">
+  <title>{{ user.username }}</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__container">
+      <a class="domen" href="{{ url_for('feed') }}">
+        <div class="domen__item">
+          <span class="domen-2lvl">amv</span><span class="domen-1lvl">.net</span>
+        </div>
+      </a>
+      <div class="username-title">{{ user.username }}</div>
+      {% if current_user.id == user.id %}
+        <div class="settings">
+          <span class="material-icons-outlined icon">settings</span>
+        </div>
+      {% endif %}
+    </div>
+  </header>
+  <main class="main">
+    <div class="user-info">
+      <div class="user-info__row-block">
+        <div class="user-info__user">
+          <div class="user__avatar">
+            <img src="../static/avatars/{{ user.avatar_image }}" alt="" class="avatar">
+          </div>
+          <div class="user__username">
+            <span class="username">{{ user.username }}</span>
+          </div>
+        </div>
+        <div class="user-info__column-block">
+          <div class="user-info__stat">
+            <div class="stat__item">
+              <div class="stat__count">{{ user_videos_count }}</div>
+              <div class="stat__text">
+                {% if user.video_count != 1 %}
+                  videos
+                {% else %}
+                  video
+                {% endif %}
+            </div>
+            </div>
+            <div class="stat__item">
+              <div class="stat__count">{{ user.subscribers_count }}</div>
+              <div class="stat__text">
+                {% if user.subscribers_count != 1 %}
+                  followers
+                {% else %}
+                  follower
+                {% endif %}
+              </div>
+            </div>
+            <div class="stat__item">
+              <div class="stat__count">42</div> <!-- заменить на {{ user.following_count }}, когда появится соответствующая колонка -->
+              <div class="stat__text">following</div>
+            </div>
+          </div>
+          <div class="user-info__social">
+            <div class="social__item">
+              <a class="social__link" href="https://instagram.com/_.skyguy._"> <!-- Заменить на {{ user.instagram_link }}, когда появится соответствующая колонка -->
+                <img src="../static/img/colorful_instagram-logo_icon.svg" alt="" class="social__img">
+              </a>
+            </div>
+            <div class="social__item">
+              <a class="social__link" href="https://t.me/skyguy"> <!-- Заменить на {{ user.telegram_link }}, когда появится соответствующая колонка -->
+                <img src="../static/img/colorful_telegram-logo_icon.svg" alt="" class="social__img">
+              </a>
+            </div>
+            <div class="social__item">
+              <a class="socail__link" href="https://tiktok.com/@mr.skyguy"> <!-- Заменить на {{ user.tiktok_link }}, когда появится соответствующая колонка -->
+                <img src="../static/img/colorful_tiktok-logo_icon.svg" alt="" class="social__img">
+              </a>
+            </div>
+            <div class="social__item">
+              <a class="social__link" href="https://vk.com/mrskyguy"> <!-- Заменить на {{ user.vk_link }}, когда появится соответствующая колонка -->
+                <img src="../static/img/colorful_vk-logo_icon.svg" alt="" class="social__img">
+              </a>
+            </div>
+          </div>
+          {% if current_user.id != user.id %}
+            <div class="to-user-buttons">
+              <button class="follow button">Follow</button>
+              <button class="open-chat button">Open chat</button>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="user-info__row-block">
+        <span class="user__description">16 y.o.{{'\n'}}From Dagestan with love</span>  <!-- заменить на user.description, когда появится соответствующая колонка -->
+        {% if current_user.id == user.id %}
+          <button class="add-video button">Add video</button>
+        {% endif %}
+      </div>
+    </div>
+  
+    <hr class="hr">
+    <div class="user-videos">
+      <div class="user-video">
+        <div class="video__preview"></div>
+        <div class="video__info"></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

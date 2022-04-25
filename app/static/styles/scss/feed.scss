@@ -193,6 +193,10 @@ $progress-bar-height: 3.5px;
 .author__info {
   margin-bottom: $margin-for-video-info;
 }
+.author__link {
+  text-decoration: none;
+  color: inherit
+}
 .author__avatar {
   display: block;
   width: 60px;
