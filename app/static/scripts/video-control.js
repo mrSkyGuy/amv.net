@@ -7,6 +7,34 @@ const currentTimeElement = videoPlayer.querySelector('.time__current-time')
 const durationTimeElement = videoPlayer.querySelector('.time__duration')
 const progress = videoPlayer.querySelector('.video-controls__progress-bar')
 const progressBar = videoPlayer.querySelector('.video-controls__progress-bar-filled')
+const viewsCount = document.querySelector(".views__count")
+
+
+function sendRequest(method, url, body = null) {
+  return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.open(method, url)
+
+      xhr.responseType = "json"
+      if (method.toLowerCase() == "post") {
+          xhr.setRequestHeader("Content-Type", "application/json")
+      }
+
+      xhr.onload = () => {
+          if (xhr.status >= 400) {
+              reject(xhr.response)
+          } else {
+              resolve(xhr.response)
+          }
+      }
+
+      xhr.onerror = () => reject(xhr.response)
+
+      method.toLowerCase() == "post" ? 
+          xhr.send(JSON.stringify(body)) 
+          : xhr.send()
+  })
+} 
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -68,9 +96,23 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   
   // Progress bar
-  video.addEventListener('timeupdate', () =>{
+  let isVideoViewed = false
+  video.addEventListener('timeupdate', () => {
     const percentage = (video.currentTime / video.duration) * 100
     progressBar.style.width = `${percentage}%`
+
+    // Если видео началось заново, то сбрасываем
+    if (percentage <= 5) isVideoViewed = false
+
+    // Если пользователь просмотрел уже больше 20% процентов от видео, то увеличиваем счетчик просмотров
+    if (percentage >= 20 && !isVideoViewed) {
+      const requestForAddView = sendRequest('GET', '/ajax/add_view_to_current_video')
+      requestForAddView.then(data => {
+        // При получении ответа от сервера, увеличиваем счетчик просмотров
+        viewsCount.textContent = data["current_views"]  // Сервер возвращает текущее количество просмотров
+        isVideoViewed = true
+      })
+    }
   })
   
   // change progress bar on click

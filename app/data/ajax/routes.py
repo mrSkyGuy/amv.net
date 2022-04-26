@@ -130,3 +130,48 @@ def get_previous_video():
     response["is_start"] = False
 
     return jsonify(response)
+
+
+@app.route("/ajax/add_view_to_current_video")
+def add_view_to_current_video():
+    feed_videos_indexes = session["feed_videos_indexes"]
+    current_video_index = session["current_video_index"]
+
+    current_video = videos[
+        feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
+    ]
+
+    current_video.views_count += 1
+    print(current_video.views_count)
+    # sess.commit()
+    return jsonify({"success": True, "current_views": current_video.views_count})
+
+
+@app.route("/ajax/like_current_video")
+def like_current_video():
+    feed_videos_indexes = session["feed_videos_indexes"]
+    current_video_index = session["current_video_index"]
+
+    current_video = videos[
+        feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
+    ]
+
+    current_video.likes_count += 1
+    # sess.commit()
+
+    return jsonify({"success": True, "current_likes": current_video.likes_count})
+
+
+@app.route("/ajax/dislike_current_video")
+def dislike_current_video():
+    feed_videos_indexes = session["feed_videos_indexes"]
+    current_video_index = session["current_video_index"]
+
+    current_video = videos[
+        feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
+    ]
+
+    current_video.likes_count -= 1
+    # sess.commit()
+
+    return jsonify({"success": True, "current_likes": current_video.likes_count})
