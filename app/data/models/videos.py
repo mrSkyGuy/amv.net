@@ -14,7 +14,6 @@ class Video(SqlAlchemyBase, SerializerMixin):
     description = sqlalchemy.Column(sqlalchemy.String, default="")
 
     views_count = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
-    likes_count = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
     comments_count = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
     video_created = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
