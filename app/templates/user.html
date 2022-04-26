@@ -113,10 +113,23 @@
   
     <hr class="hr">
     <div class="user-videos">
-      <div class="user-video">
-        <div class="video__preview"></div>
-        <div class="video__info"></div>
-      </div>
+      {% for video in user.videos %}
+        <div class="user-video">
+          <div class="video__preview">
+            <img src="../static/previews/{{ video.preview_path }}" alt="" class="preview__content">
+          </div>
+          <div class="video__info">
+            <div class="video__views">
+              <span class="material-icons-outlined">visibility</span>
+              <span class="views__count">{{ video.views_count }}</span>
+            </div>
+            <div class="video__likes">
+              <span class="material-icons-outlined">favorite_border</span>
+              <span class="views__count">{{ video.likes_count }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </main>
 </body>
