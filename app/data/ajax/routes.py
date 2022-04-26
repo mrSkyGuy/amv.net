@@ -1,4 +1,5 @@
 from flask import jsonify, session, request
+from flask_login import current_user
 
 from random import sample
 
@@ -56,7 +57,6 @@ def get_next_video():
             "preview_path",
             "description",
             "views_count",
-            "likes_count",
             "comments_count",
             "video_created",
         )
@@ -67,9 +67,10 @@ def get_next_video():
             feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
         ].author_id
     )
+    response["likes_count"] = len(videos[feed_videos_indexes[current_video_index % len(feed_videos_indexes)]].likes)
     response["author_avatar_path"] = author.avatar_image
     response["author_username"] = author.username
-    response["author_subscribers_count"] = author.subscribers_count
+    response["author_subscribers_count"] = len(author.followers)
     response["author_videos_count"] = len(author.videos)
 
     if current_video_index == 0:
@@ -113,7 +114,6 @@ def get_previous_video():
             "preview_path",
             "description",
             "views_count",
-            "likes_count",
             "comments_count",
             "video_created",
         )
@@ -123,10 +123,11 @@ def get_previous_video():
             feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
         ].author_id
     )
+    response["likes_count"] = len(videos[feed_videos_indexes[current_video_index % len(feed_videos_indexes)]].likes)
     response["author_avatar_path"] = author.avatar_image
     response["author_username"] = author.username
     response["author_videos_count"] = len(author.videos)
-    response["author_subscribers_count"] = author.subscribers_count
+    response["author_subscribers_count"] = len(author.followers)
     response["is_start"] = False
 
     return jsonify(response)
@@ -140,10 +141,9 @@ def add_view_to_current_video():
     current_video = videos[
         feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
     ]
-
+    # sess = create_session()
     current_video.views_count += 1
-    print(current_video.views_count)
-    # sess.commit()
+    sess.commit()
     return jsonify({"success": True, "current_views": current_video.views_count})
 
 
@@ -156,10 +156,18 @@ def like_current_video():
         feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
     ]
 
-    current_video.likes_count += 1
-    # sess.commit()
+    if current_user.is_authenticated:
+        user = sess.query(User).get(current_user.id)
+        current_video.likes.append(user)
+        sess.commit()
 
-    return jsonify({"success": True, "current_likes": current_video.likes_count})
+        print(user.liked_videos)
+        print(current_video.likes)
+
+        return jsonify({"success": True, "current_likes": len(current_video.likes)})
+
+    return jsonify({"success": False})
+
 
 
 @app.route("/ajax/dislike_current_video")
@@ -171,7 +179,10 @@ def dislike_current_video():
         feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
     ]
 
-    current_video.likes_count -= 1
-    # sess.commit()
+    if current_user.is_authenticated:
+        if current_user in current_video.likes:
+            current_video.likes.remove(current_user)
+            sess.commit()
+        return jsonify({"success": True, "current_likes": len(current_video.likes)})
 
-    return jsonify({"success": True, "current_likes": current_video.likes_count})
+    return jsonify({"success": False})

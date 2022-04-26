@@ -53,10 +53,10 @@ def feed():
         current_video_description=current_video.description,
         author_avatar_path=current_video.author.avatar_image,
         author_username=current_video.author.username,
-        author_subscribers_count=current_video.author.subscribers_count,
+        author_subscribers_count=len(current_video.author.followers),
         author_videos_count=len(current_video.author.videos),
         video_views_count=current_video.views_count,
-        video_likes_count=current_video.likes_count,
+        video_likes_count=len(current_video.likes),
         video_comments_count=current_video.comments_count,
         next_video_preview_path=next_video.preview_path,
     )

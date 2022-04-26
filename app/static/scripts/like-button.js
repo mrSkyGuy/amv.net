@@ -32,16 +32,24 @@ function sendRequest(method, url, body = null) {
 document.addEventListener("DOMContentLoaded", () => {
     likeButton.addEventListener('click', () => {
         if (likeButton.classList.contains("is-active")) {
-            const requestForLikeVideo = sendRequest('GET', "/ajax/dislike_current_video")
-            requestForLikeVideo.then(data => {
-                likeButton.classList.remove("is-active")
-                likesCount.textContent = data["current_likes"]
+            const requestForDislikeVideo = sendRequest('GET', "/ajax/dislike_current_video")
+            requestForDislikeVideo.then(data => {
+                if (data["success"]) {
+                    likeButton.classList.remove("is-active")
+                    likesCount.textContent = data["current_likes"]
+                } else {
+                    // Показывать сообщение, что лайкать могут только авторизованные пользователи
+                }
             })
         } else {
-            const requestForDislikeVideo = sendRequest('GET', "/ajax/like_current_video")
-            requestForDislikeVideo.then(data => {
-                likeButton.classList.add("is-active")
-                likesCount.textContent = data["current_likes"]
+            const requestForLikeVideo = sendRequest('GET', "/ajax/like_current_video")
+            requestForLikeVideo.then(data => {
+                if (data["success"]) {
+                    likeButton.classList.add("is-active")
+                    likesCount.textContent = data["current_likes"]
+                } else {
+                    // Показывать сообщение, что лайкать могут только авторизованные пользователи
+                }
             })
         }
     })

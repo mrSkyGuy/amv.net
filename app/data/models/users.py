@@ -4,6 +4,7 @@ import sqlalchemy
 
 from datetime import datetime
 from ..db_session import SqlAlchemyBase
+from ..models.videos import Video
 from sqlalchemy_serializer import SerializerMixin
 
 
@@ -47,7 +48,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
         "Video",
         secondary="liked_videos",
         primaryjoin=liked_videos.c.user_id == id,
-        secondaryjoin=liked_videos.c.video_id == id,
+        secondaryjoin=liked_videos.c.video_id == Video.id,
         backref="likes"
     )
 
