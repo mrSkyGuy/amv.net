@@ -7,6 +7,23 @@ from ..db_session import SqlAlchemyBase
 from sqlalchemy_serializer import SerializerMixin
 
 
+followers = sqlalchemy.Table(
+    "followers",
+    SqlAlchemyBase.metadata,
+    sqlalchemy.Column("author_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id")),
+    sqlalchemy.Column("follower_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id")),
+)
+
+liked_videos = sqlalchemy.Table(
+    "liked_videos",
+    SqlAlchemyBase.metadata,
+    sqlalchemy.Column(
+        "video_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("videos.id")
+    ),
+    sqlalchemy.Column("user_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id")),
+)
+
+
 class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = "users"
 
@@ -19,7 +36,21 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     videos = sqlalchemy.orm.relation("Video", back_populates="author")
-    subscribers_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    followers = sqlalchemy.orm.relation(
+        "User",
+        secondary="followers",
+        primaryjoin=followers.c.author_id == id,
+        secondaryjoin=followers.c.follower_id == id,
+        backref="following"
+    )
+    liked_videos = sqlalchemy.orm.relation(
+        "Video",
+        secondary="liked_videos",
+        primaryjoin=liked_videos.c.user_id == id,
+        secondaryjoin=liked_videos.c.video_id == id,
+        backref="likes"
+    )
+
     notifications_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     messages_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
