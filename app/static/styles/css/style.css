@@ -263,7 +263,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-top: 20vh;
 }
 
 /* Текущее видео (current) */
@@ -281,7 +280,7 @@
   border-radius: 15px;
   min-width: 46vw;
   max-width: 60vw;
-  height: 56vh;
+  max-height: 70vh;
   -webkit-box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.25);
 }
@@ -485,8 +484,16 @@
   margin-bottom: 1vh;
 }
 
+.author__link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .author__avatar {
   display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 
 .author__nickname {
@@ -758,6 +765,14 @@ span[class^="material-icons"] {
 .switch span:active {
   font-weight: 700;
   color: #8C43EA;
+}
+
+.switch:focus, .switch:active {
+  outline: none !important;
+}
+
+.switch::-moz-focus-inner {
+  border: 0 !important;
 }
 
 .footer {
