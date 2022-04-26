@@ -50,6 +50,7 @@ def feed():
 
         current_video_content_path=current_video.video_path,
         current_video_preview_path=current_video.preview_path,
+        current_video_description=current_video.description,
         author_avatar_path=current_video.author.avatar_image,
         author_username=current_video.author.username,
         author_subscribers_count=current_video.author.subscribers_count,
