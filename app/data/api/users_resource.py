@@ -33,22 +33,39 @@ class UsersResource(Resource):
 
         return jsonify(
             {
-                "user": user.to_dict(
-                    only=("id", "username", "avatar_image", "subscribers_count")
-                ),
+                "user": {
+                    **user.to_dict(
+                        only=("id", "username", "avatar_image", )
+                    ),
+                    "followers": [
+                        follower.to_dict(only=("id", "username"))
+                        for follower in user.followers
+                    ],
+                    "following": [
+                        following.to_dict(only=("id", "username"))
+                        for following in user.following
+                    ]
+                },
                 "videos": [
-                    video.to_dict(
-                        only=(
-                            "id",
-                            "video_path",
-                            "preview_path",
-                            "description",
-                            "views_count",
-                            "likes_count",
-                            "comments_count",
-                            "video_created",
-                        )
-                    )
+                    {
+                        "video": {
+                            **video.to_dict(
+                                only=(
+                                    "id",
+                                    "video_path",
+                                    "preview_path",
+                                    "description",
+                                    "views_count",
+                                    "comments_count",
+                                    "video_created",
+                                )
+                            ),
+                            "likes": [
+                                user.to_dict(only=("id", "username"))
+                                for user in video.likes
+                            ]
+                        }
+                    }
                     for video in user.videos
                 ],
                 "success": True,
@@ -91,22 +108,39 @@ class UsersListResource(Resource):
             {
                 "users": [
                     {
-                        "user": user.to_dict(
-                            only=("id", "username", "avatar_image", "subscribers_count")
-                        ),
+                        "user": {
+                            **user.to_dict(
+                                only=("id", "username", "avatar_image", )
+                            ),
+                            "followers": [
+                                follower.to_dict(only=("id", "username"))
+                                for follower in user.followers
+                            ],
+                            "following": [
+                                following.to_dict(only=("id", "username"))
+                                for following in user.following
+                            ]
+                        },
                         "videos": [
-                            video.to_dict(
-                                only=(
-                                    "id",
-                                    "video_path",
-                                    "preview_path",
-                                    "description",
-                                    "views_count",
-                                    "likes_count",
-                                    "comments_count",
-                                    "video_created",
-                                )
-                            )
+                            {
+                                "video": {
+                                    **video.to_dict(
+                                        only=(
+                                            "id",
+                                            "video_path",
+                                            "preview_path",
+                                            "description",
+                                            "views_count",
+                                            "comments_count",
+                                            "video_created",
+                                        )
+                                    ),
+                                    "likes": [
+                                        user.to_dict(only=("id", "username"))
+                                        for user in video.likes
+                                    ]
+                                }
+                            }
                             for video in user.videos
                         ],
                     }
@@ -171,27 +205,42 @@ class UsersListResource(Resource):
 
         return jsonify(
             {
-                "success": True,
-                "user": user.to_dict(
-                    only=("avatar_image", "id", "subscribers_count", "username")
-                ),
+                "user": {
+                    **user.to_dict(
+                        only=("id", "username", "avatar_image", )
+                    ),
+                    "followers": [
+                        follower.to_dict(only=("id", "username"))
+                        for follower in user.followers
+                    ],
+                    "following": [
+                        following.to_dict(only=("id", "username"))
+                        for following in user.following
+                    ]
+                },
                 "videos": [
                     {
-                        "video": video.to_dict(
-                            only=(
-                                "id",
-                                "video_path",
-                                "preview_path",
-                                "description",
-                                "views_count",
-                                "likes_count",
-                                "comments_count",
-                                "video_created",
-                            )
-                        ),
+                        "video": {
+                            **video.to_dict(
+                                only=(
+                                    "id",
+                                    "video_path",
+                                    "preview_path",
+                                    "description",
+                                    "views_count",
+                                    "comments_count",
+                                    "video_created",
+                                )
+                            ),
+                            "likes": [
+                                user.to_dict(only=("id", "username"))
+                                for user in video.likes
+                            ]
+                        }
                     }
                     for video in user.videos
                 ],
+                "success": True,
             }
         )
 
