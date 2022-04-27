@@ -8,14 +8,14 @@ from ..models.videos import Video
 from sqlalchemy_serializer import SerializerMixin
 
 
-followers = sqlalchemy.Table(
+followers = sqlalchemy.Table(  # Связочная таблица, для хранения информации, кто на кого подписан
     "followers",
     SqlAlchemyBase.metadata,
     sqlalchemy.Column("author_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id")),
     sqlalchemy.Column("follower_id", sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id")),
 )
 
-liked_videos = sqlalchemy.Table(
+liked_videos = sqlalchemy.Table(  # Связочная таблица, для хранения информации, кто какое видео лайкнул
     "liked_videos",
     SqlAlchemyBase.metadata,
     sqlalchemy.Column(
@@ -34,7 +34,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     email = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
     phone = sqlalchemy.Column(sqlalchemy.String, unique=True, index=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=False)
-    modified_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
+    created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     videos = sqlalchemy.orm.relation("Video", back_populates="author")
     followers = sqlalchemy.orm.relation(
