@@ -195,6 +195,7 @@ body {
 }
 
 .user__description {
+  font-family: 'Comfortaa';
   white-space: pre;
   font-size: 20px;
 }
