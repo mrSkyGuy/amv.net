@@ -35,22 +35,35 @@ class VideosResource(Resource):
         video = session.query(Video).get(video_id)
 
         response = {
-            "video": video.to_dict(
-                only=(
-                    "id",
-                    "video_path",
-                    "preview_path",
-                    "description",
-                    "views_count",
-                    "likes_count",
-                    "comments_count",
-                    "video_created",
-                )
-            ),
+            "video": {
+                **video.to_dict(
+                    only=(
+                        "id",
+                        "video_path",
+                        "preview_path",
+                        "description",
+                        "views_count",
+                        "comments_count",
+                        "video_created",
+                    )
+                ),
+                "likes": [
+                    user.to_dict(only=("id", "username"))
+                    for user in video.likes
+                ]
+            },
             "author": {
-                "username": video.author.username,
-                "videos_count": len(video.author.videos),
-                "subscribers_count": video.author.subscribers_count,
+                **video.author.to_dict(
+                    only=("id", "username", "avatar_image", )
+                ),
+                "followers": [
+                    follower.to_dict(only=("id", "username"))
+                    for follower in video.author.followers
+                ],
+                "following": [
+                    following.to_dict(only=("id", "username"))
+                    for following in video.author.following
+                ]
             },
             "success": True,
         }
@@ -98,22 +111,35 @@ class VideosListResource(Resource):
         response = {
             "videos": [
                 {
-                    "video": video.to_dict(
-                        only=(
-                            "id",
-                            "video_path",
-                            "preview_path",
-                            "description",
-                            "views_count",
-                            "likes_count",
-                            "comments_count",
-                            "video_created",
-                        )
-                    ),
+                    "video": {
+                        **video.to_dict(
+                            only=(
+                                "id",
+                                "video_path",
+                                "preview_path",
+                                "description",
+                                "views_count",
+                                "comments_count",
+                                "video_created",
+                            )
+                        ),
+                        "likes": [
+                            user.to_dict(only=("id", "username"))
+                            for user in video.likes
+                        ]
+                    },
                     "author": {
-                        "username": video.author.username,
-                        "videos_count": len(video.author.videos),
-                        "subscribers_count": video.author.subscribers_count,
+                        **video.author.to_dict(
+                            only=("id", "username", "avatar_image", )
+                        ),
+                        "followers": [
+                            follower.to_dict(only=("id", "username"))
+                            for follower in video.author.followers
+                        ],
+                        "following": [
+                            following.to_dict(only=("id", "username"))
+                            for following in video.author.following
+                        ]
                     },
                 }
                 for video in videos
@@ -225,22 +251,35 @@ class VideosListResource(Resource):
             {
                 "success": True,
                 "result": {
-                    "video": video.to_dict(
-                        only=(
-                            "id",
-                            "video_path",
-                            "preview_path",
-                            "description",
-                            "views_count",
-                            "likes_count",
-                            "comments_count",
-                            "video_created",
-                        )
-                    ),
+                    "video": {
+                        **video.to_dict(
+                            only=(
+                                "id",
+                                "video_path",
+                                "preview_path",
+                                "description",
+                                "views_count",
+                                "comments_count",
+                                "video_created",
+                            )
+                        ),
+                        "likes": [
+                            user.to_dict(only=("id", "username"))
+                            for user in video.likes
+                        ]
+                    },
                     "author": {
-                        "username": video.author.username,
-                        "videos_count": len(video.author.videos),
-                        "subscribers_count": video.author.subscribers_count,
+                        **video.author.to_dict(
+                            only=("id", "username", "avatar_image", )
+                        ),
+                        "followers": [
+                            follower.to_dict(only=("id", "username"))
+                            for follower in video.author.followers
+                        ],
+                        "following": [
+                            following.to_dict(only=("id", "username"))
+                            for following in video.author.following
+                        ]
                     },
                 },
             }
