@@ -148,6 +148,10 @@ body {
   align-self: flex-end;
 }
 
+.is-following {
+  background: rgba(187, 153, 232, 0.7) !important;
+}
+
 .button {
   border: none;
   background: rgba(140, 67, 234, 0.7);

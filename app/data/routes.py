@@ -123,4 +123,17 @@ def users(username):
     if user is None:
         abort(404)
 
-    return render_template("user.html", user=user)
+    return render_template(
+        "user.html", 
+        user=user, 
+        is_cuser_following=len(
+            list(
+                filter(
+                    lambda u: u.id == current_user.id, 
+                    user.followers
+                )
+            )
+        ) == 1  # Подписан ли текущий пользователь на автора
+            if current_user.is_authenticated
+            else False
+    )

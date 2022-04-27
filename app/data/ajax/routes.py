@@ -220,3 +220,26 @@ def dislike_current_video():
         return jsonify({"success": True, "current_likes": len(current_video.likes)})
 
     return jsonify({"success": False})
+
+
+# Этот путь запроса нужен для подписки и отписки пользователя
+@app.route("/ajax/follow_user", methods=["POST"])
+def follow_user():
+    if current_user.is_authenticated:
+        author_username = request.json.get("userName")
+        author = sess.query(User).filter(User.username == author_username).first()
+        temp = list(filter(lambda user: user.id == current_user.id, author.followers))
+        cuser = sess.query(User).get(current_user.id)
+        if request.json.get("unfollow"):
+            if len(temp) == 1:
+                author.followers.remove(cuser)
+                sess.commit()
+                return jsonify({"success": True, "followers_count": len(author.followers)})
+            return jsonify({"success": False})
+        
+        if len(temp) != 0:
+            return jsonify({"success": False})
+        author.followers.append(cuser)
+        sess.commit()
+        return jsonify({"success": True, "followers_count": len(author.followers)})
+    return jsonify({"success": False})

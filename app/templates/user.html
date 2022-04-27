@@ -59,7 +59,7 @@
             </div>
             </div>
             <div class="stat__item">
-              <div class="stat__count">{{ user.followers|count }}</div>
+              <div class="stat__count followers-count">{{ user.followers|count }}</div>
               <div class="stat__text">
                 {% if user.followers|count != 1 %}
                   followers
@@ -97,7 +97,11 @@
           </div>
           {% if current_user.id != user.id %}
             <div class="to-user-buttons">
-              <button class="follow button">Follow</button>
+              {% if is_cuser_following %}
+                <button class="follow is-following button">Unfollow</button>
+              {% else %}
+                <button class="follow button">Follow</button>
+              {% endif %}
               <button class="open-chat button">Open chat</button>
             </div>
           {% endif %}
@@ -132,5 +136,7 @@
       {% endfor %}
     </div>
   </main>
+
+  <script src="../static/scripts/follow.js"></script>
 </body>
 </html>
