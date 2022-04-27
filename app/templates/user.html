@@ -49,9 +49,9 @@
         <div class="user-info__column-block">
           <div class="user-info__stat">
             <div class="stat__item">
-              <div class="stat__count">{{ user_videos_count }}</div>
+              <div class="stat__count">{{ user.videos|count }}</div>
               <div class="stat__text">
-                {% if user.video_count != 1 %}
+                {% if user.videos|count != 1 %}
                   videos
                 {% else %}
                   video
@@ -59,9 +59,9 @@
             </div>
             </div>
             <div class="stat__item">
-              <div class="stat__count">{{ user.subscribers_count }}</div>
+              <div class="stat__count">{{ user.followers|count }}</div>
               <div class="stat__text">
-                {% if user.subscribers_count != 1 %}
+                {% if user.followers|count != 1 %}
                   followers
                 {% else %}
                   follower
@@ -69,7 +69,7 @@
               </div>
             </div>
             <div class="stat__item">
-              <div class="stat__count">42</div> <!-- заменить на {{ user.following_count }}, когда появится соответствующая колонка -->
+              <div class="stat__count">{{ user.following|count }}</div>
               <div class="stat__text">following</div>
             </div>
           </div>
@@ -125,7 +125,7 @@
             </div>
             <div class="video__likes">
               <span class="material-icons-outlined">favorite_border</span>
-              <span class="views__count">{{ video.likes_count }}</span>
+              <span class="views__count">{{ video.likes|count }}</span>
             </div>
           </div>
         </div>
