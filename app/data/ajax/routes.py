@@ -10,13 +10,22 @@ from data.models.users import User
 
 
 sess = create_session()
-videos = sess.query(Video).all()
-__video_indexes = [i for i in range(len(videos))]
+videos = sess.query(Video).all()  # Получаем все видео. Пока что это очень 
+#                                   неразумно - получать все сразу, но в дальнейшем я 
+#                                   исправлю это
+
+# Так как в сессиях не получается хранить список "videos", я решил хранить только индексы.
+# Да и так будет меньше нагружаться сессия
+__video_indexes = [i for i in range(len(videos))]  
 
 
+# Этот путь запроса служит для получения данных о следующем видео. И, при необходимости, 
+# текущего видео; то есть, перелистывания
 @app.route("/ajax/get_next_video", methods=["POST"])
 def get_next_video():
-    # Получаем случайную ленту
+    # Получаем случайную ленту. Точнее, случайные индексы для ленты. 
+    # Если мы только зашли на сайт, то лента генерируется. В последующих разах, 
+    # до тех пор, пока сессия не закроется, будет все та же лента
     if "feed_videos_indexes" not in session.keys():
         session["feed_videos_indexes"] = sample(__video_indexes, len(__video_indexes))
     feed_videos_indexes = session["feed_videos_indexes"]
@@ -39,6 +48,8 @@ def get_next_video():
 
         response = current_video.to_dict(only=("preview_path",))
         response["is_start"] = current_video_index == 0
+        # is_start говорит клиенту, что мы в начале ленты и нет возможности переключится
+        # на предыдущее видео
 
         return jsonify(response)
 
@@ -71,6 +82,8 @@ def get_next_video():
         "is_start": current_video_index == 0
     }
 
+    # Ниже мы проверяем, что если человек уже лайкнул это видео, то показывать 
+    # соответствующий лайк на странице
     if current_user.is_authenticated:
         temp = list(
             filter(lambda video: video.id == current_video.id, current_user.liked_videos)
@@ -82,14 +95,14 @@ def get_next_video():
     return jsonify(response)
 
 
+# Этот путь запроса служит для получения данных о предыдущем видео. И, при необходимости, 
+# текущего видео; то есть, перелистывания
 @app.route("/ajax/get_previous_video", methods=["POST"])
 def get_previous_video():
-    # Получаем случайную ленту
     if "feed_videos_indexes" not in session.keys():
         session["feed_videos_indexes"] = sample(__video_indexes, len(__video_indexes))
     feed_videos_indexes = session["feed_videos_indexes"]
 
-    # Получаем текущий индекс видео из сессий
     current_video_index = session.get("current_video_index", 0)
 
     if current_video_index > 0:  # Если вернулись в начало, то дальше не уходим
@@ -141,6 +154,10 @@ def get_previous_video():
     return jsonify(response)
 
 
+# Этот путь запроса служит для того, чтобы сохранить данные о том, что видео было кем-то 
+# просмотрено. Я решил, что мы не будем сохранять данные о том, кто именно посмотрел 
+# видео, а просто увеличивать счетчик. Скорее всего, я реализую это в дальнейших 
+# обновлениях 
 @app.route("/ajax/add_view_to_current_video")
 def add_view_to_current_video():
     feed_videos_indexes = session["feed_videos_indexes"]
@@ -149,12 +166,22 @@ def add_view_to_current_video():
     current_video = videos[
         feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
     ]
-    # sess = create_session()
+
     current_video.views_count += 1
     sess.commit()
-    return jsonify({"success": True, "current_views": current_video.views_count})
+    return jsonify(
+        {
+            "success": True, 
+            "current_views": current_video.views_count  # Отсылаем клиенту о просмотрах 
+            #                                             на данный момент
+        }
+    )
 
 
+# Этот путь запроса служит для того, чтобы сохранить данные о том, что видео было кем-то 
+# лайкнуто. Я решил, в отличии от предыдущего пути, что мы будем сохранять данные о том, 
+# кто именно посмотрел лайкнул видео. Поэтому, лайк от неавторизованного юзера не 
+# засчитывается => счетчик лайков останется не тронутым
 @app.route("/ajax/like_current_video")
 def like_current_video():
     feed_videos_indexes = session["feed_videos_indexes"]
@@ -166,11 +193,10 @@ def like_current_video():
 
     if current_user.is_authenticated:
         user = sess.query(User).get(current_user.id)
-        current_video.likes.append(user)
+        current_video.likes.append(user)  # Добавляем лайк к видео. 
+        # Тем самым, благодаря SQLAlchemy, у нас, к тому же, пополнится список лайкнутых 
+        # видео у самого пользователя
         sess.commit()
-
-        print(user.liked_videos)
-        print(current_video.likes)
 
         return jsonify({"success": True, "current_likes": len(current_video.likes)})
 
