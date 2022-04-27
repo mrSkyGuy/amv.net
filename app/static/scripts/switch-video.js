@@ -4,6 +4,7 @@ const nextVideoSwitchButton = document.querySelector(".next-video-switch"),
 const currentVideo = document.querySelector(".current-video"),
       currentVideoInfo = currentVideo.querySelector(".current-video__info"),
       currentVideoContent = currentVideo.querySelector(".video__content"),
+      currentVideoAuthorLink = currentVideoInfo.querySelector(".author__link"),
       currentVideoAuthorAvatar = currentVideoInfo.querySelector(".author__avatar"),
       currentVideoAuthorNickname = currentVideoInfo.querySelector(".author__nickname"),
       currentVideoAuthorSubscribersCount = currentVideoInfo.querySelector(".subscribers__count"),
@@ -18,10 +19,10 @@ const nextVideoContent = document.querySelector(".next-video .next-video__conten
       previousVideo = document.querySelector(".previous-video"),
       previousVideoSwitch = previousVideoSwitchButton.querySelector(".switch")
 
-// let likeButton = document.querySelector(".lcssd__like")
-
 
 function sendRequest(method, url, body = null) {
+    // Функция для AJAX запросов на сервер
+
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
         xhr.open(method, url)
@@ -48,25 +49,32 @@ function sendRequest(method, url, body = null) {
 } 
 
 
+// Если переключаем на следующее видео
 nextVideoSwitchButton.addEventListener("click", e => {
-    const requestForSwitchCurrentVideo = sendRequest(
-        "post", "/ajax/get_next_video", {switch: true}
+    const requestForSwitchCurrentVideo = sendRequest(  // Запрос на сервер для данных
+        "post", "/ajax/get_next_video", {switch: true}  // *с переключением видео
     )
     requestForSwitchCurrentVideo.then(data => {
-        if (data["is_start"]) {
+        if (data["is_start"]) {  
+            // Если сервер сказал нам, что это начало ленты, то скрываем блок 
+            // предыдущего видео и кнопку переключения
             previousVideoSwitchButton.style.opacity = 0
             previousVideoSwitch.style.cursor = 'default'
             previousVideo.style.opacity = 0
             reject()
         } else {
+            // Иначе показываем все обратно
             previousVideoSwitchButton.style.opacity = 1
             previousVideoSwitch.style.cursor = 'pointer'
             previousVideo.style.opacity = 1
         }
-
+        
+        // Меняем содержимое текущего видео
         currentVideoContent.setAttribute("src", `../static/videos/${data["video_path"]}`)
         currentVideoContent.setAttribute("poster", `../static/previews/${data["preview_path"]}`)
-
+        
+        // Также меняем данные о видео
+        currentVideoAuthorLink.setAttribute("href", `/${data["author_username"]}`)
         currentVideoAuthorAvatar.setAttribute("src", `../static/avatars/${data["author_avatar_path"]}`)
         currentVideoAuthorNickname.textContent = data["author_username"]
         currentVideoAuthorSubscribersCount.textContent = data["author_subscribers_count"]
@@ -77,13 +85,16 @@ nextVideoSwitchButton.addEventListener("click", e => {
         currentVideoVideoCommentsCount.textContent = data["comments_count"]
 
         currentVideoDescription.textContent = data["description"]
-        console.log(data["is_video_liked"]);
+
+        // Если сервер нам говорит, что видео уже было лайкнуто пользователем, то показываем 
+        // лайкнутую иконку 
         if (data["is_video_liked"]) {
             if (!likeButton.classList.contains("is-active")) likeButton.classList.add("is-active")
         } else {
             likeButton.classList.remove("is-active")
         }
     }).then(() => {
+        // Следующим шагом меняем содержимое следующего видео (только превью)
         const requestForGetNextVideoPreview = sendRequest(
             "post", "/ajax/get_next_video", {switch: false}
         )
@@ -91,6 +102,7 @@ nextVideoSwitchButton.addEventListener("click", e => {
             nextVideoContent.setAttribute("src", `../static/previews/${data["preview_path"]}`)
         })
     }).then(() => {
+        // А также содержимое предыдущего видео
         const requestForGetPreviousVideoPreview = sendRequest(
             "post", "/ajax/get_previous_video", {switch: false}
         )
@@ -100,6 +112,7 @@ nextVideoSwitchButton.addEventListener("click", e => {
     })
 })
 
+// Производим те же самые действия только для переключения на предыдущее видео
 previousVideoSwitchButton.addEventListener("click", e => {
     const requestForSwitchCurrentVideo = sendRequest(
         "post", "/ajax/get_previous_video", {switch: true}
@@ -118,7 +131,8 @@ previousVideoSwitchButton.addEventListener("click", e => {
 
         currentVideoContent.setAttribute("src", `../static/videos/${data["video_path"]}`)
         currentVideoContent.setAttribute("poster", `../static/previews/${data["preview_path"]}`)
-
+        
+        currentVideoAuthorLink.setAttribute("href", `/${data["author_username"]}`)
         currentVideoAuthorAvatar.setAttribute("src", `../static/avatars/${data["author_avatar_path"]}`)
         currentVideoAuthorNickname.textContent = data["author_username"]
         currentVideoAuthorSubscribersCount.textContent = data["author_subscribers_count"]
