@@ -38,7 +38,7 @@ function sendRequest(method, url, body = null) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Play and Pause button
+  // Остановка видео при нажатии на кнопку
   playButton.addEventListener('click', e => {
       if (video.paused) {
         video.play()
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
     
-  // Volume
+  // Громкость
   volume.addEventListener('mousemove', e => {
       video.volume = e.target.value
       if (video.volume >= 0.5) {
@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   })
   
+  // Если мы нажали на иконку громкости, то переключаем между вкл и выкл режимами
   volumeIcon.addEventListener("click", () => {
     if (video.volume > 0) {
       video.volume = 0;
@@ -73,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
   
-  // current time and duration
+  // Изменение время на видео
   const currentTime = () => {
       let currentMinutes = Math.floor(video.currentTime / 60)
       let currentSeconds = Math.floor(video.currentTime - currentMinutes * 60)
@@ -85,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   video.addEventListener('timeupdate', currentTime)
+
+  // При нажатии на видео останавливаем
   video.addEventListener('click', () => {
     if (video.paused) {
       video.play()
@@ -95,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
   
-  // Progress bar
+  // Прогресс бар
   let isVideoViewed = false
   video.addEventListener('timeupdate', () => {
     const percentage = (video.currentTime / video.duration) * 100
@@ -115,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
   
-  // change progress bar on click
+  // Перемещение по прогресс бару
   progress.addEventListener('click', e => {
     const progressTime = (e.offsetX / progress.offsetWidth) * video.duration
     video.currentTime = progressTime
