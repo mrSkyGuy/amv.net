@@ -184,12 +184,13 @@
 }
 
 .current-video__description p {
+  white-space: pre;
   width: 40vw;
   overflow: hidden;
   white-space: wrap;
   text-overflow: ellipsis;
   text-align: center;
-  font-family: 'Roboto';
+  font-family: 'Comfortaa';
 }
 
 .current-video__options {
