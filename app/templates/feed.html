@@ -153,7 +153,7 @@
         <div class="current-video__lcssd">  
           <!-- lcssd - like+comment+share+save+download -->
           
-          <button class="lcssd__like">
+          <button class="lcssd__like {% if is_video_liked %} is-active {% endif %}">
             <span class="material-icons not-liked bouncy">favorite_border</span>
             <span class="material-icons is-liked bouncy">favorite</span>
             <span class="like-overlay"></span>

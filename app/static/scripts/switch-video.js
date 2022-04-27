@@ -18,6 +18,8 @@ const nextVideoContent = document.querySelector(".next-video .next-video__conten
       previousVideo = document.querySelector(".previous-video"),
       previousVideoSwitch = previousVideoSwitchButton.querySelector(".switch")
 
+// let likeButton = document.querySelector(".lcssd__like")
+
 
 function sendRequest(method, url, body = null) {
     return new Promise((resolve, reject) => {
@@ -75,6 +77,12 @@ nextVideoSwitchButton.addEventListener("click", e => {
         currentVideoVideoCommentsCount.textContent = data["comments_count"]
 
         currentVideoDescription.textContent = data["description"]
+        console.log(data["is_video_liked"]);
+        if (data["is_video_liked"]) {
+            if (!likeButton.classList.contains("is-active")) likeButton.classList.add("is-active")
+        } else {
+            likeButton.classList.remove("is-active")
+        }
     }).then(() => {
         const requestForGetNextVideoPreview = sendRequest(
             "post", "/ajax/get_next_video", {switch: false}
@@ -121,6 +129,11 @@ previousVideoSwitchButton.addEventListener("click", e => {
         currentVideoVideoCommentsCount.textContent = data["comments_count"]
 
         currentVideoDescription.textContent = data["description"]
+        if (data["is_video_liked"]) {
+            if (!likeButton.classList.contains("is-active")) likeButton.classList.add("is-active")
+        } else {
+            likeButton.classList.remove("is-active")
+        }
     }).then(() => {
         const requestForGetNextVideoPreview = sendRequest(
             "post", "/ajax/get_next_video", {switch: false}

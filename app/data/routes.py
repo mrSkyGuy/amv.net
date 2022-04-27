@@ -1,5 +1,5 @@
 from flask import redirect, render_template, url_for, request, session, abort
-from flask_login import login_user
+from flask_login import current_user, login_user
 
 from random import sample
 
@@ -51,6 +51,10 @@ def feed():
         current_video_content_path=current_video.video_path,
         current_video_preview_path=current_video.preview_path,
         current_video_description=current_video.description,
+        is_video_liked=(current_video in current_user.liked_videos)
+        if current_user.is_authenticated
+        else False,
+        
         author_avatar_path=current_video.author.avatar_image,
         author_username=current_video.author.username,
         author_subscribers_count=len(current_video.author.followers),

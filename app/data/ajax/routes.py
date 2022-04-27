@@ -25,6 +25,10 @@ def get_next_video():
     current_video_index = session.get("current_video_index", -1)
     current_video_index += 1
 
+    current_video = videos[
+        feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
+    ]
+
     if not request.json.get("switch", False):
         # Если нам в параметрах запроса сказали, что переключать видео не надо
         # (то есть, оставить индекс прежним), то возвращаем следующее видео, без
@@ -33,14 +37,8 @@ def get_next_video():
         # Скорее всего данный запрос будет использоваться для получения превью
         # для блока .next-video__preview (либо в другом руте .previous-video__preview)
 
-        response = videos[
-            feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
-        ].to_dict(only=("preview_path",))
-
-        if current_video_index == 0:
-            response["is_start"] = True
-        else:
-            response["is_start"] = False
+        response = current_video.to_dict(only=("preview_path",))
+        response["is_start"] = current_video_index == 0
 
         return jsonify(response)
 
@@ -49,9 +47,7 @@ def get_next_video():
     # то изменяем текущий индекс видео на следующий
     session["current_video_index"] = current_video_index
 
-    response = videos[
-        feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
-    ].to_dict(
+    response = current_video.to_dict(
         only=(
             "video_path",
             "preview_path",
@@ -63,20 +59,25 @@ def get_next_video():
     )
     # Уточняем сведения об авторе
     author = sess.query(User).get(
-        videos[
-            feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
-        ].author_id
+        current_video.author_id
     )
-    response["likes_count"] = len(videos[feed_videos_indexes[current_video_index % len(feed_videos_indexes)]].likes)
-    response["author_avatar_path"] = author.avatar_image
-    response["author_username"] = author.username
-    response["author_subscribers_count"] = len(author.followers)
-    response["author_videos_count"] = len(author.videos)
+    response = {
+        **response,
+        "likes_count": len(current_video.likes),
+        "author_avatar_path": author.avatar_image,
+        "author_username": author.username,
+        "author_subscribers_count": len(author.followers),
+        "author_videos_count": len(author.videos),
+        "is_start": current_video_index == 0
+    }
 
-    if current_video_index == 0:
-        response["is_start"] = True
+    if current_user.is_authenticated:
+        temp = list(
+            filter(lambda video: video.id == current_video.id, current_user.liked_videos)
+        )
+        response["is_video_liked"] = len(temp) == 1
     else:
-        response["is_start"] = False
+        response["is_video_liked"] = False
 
     return jsonify(response)
 
@@ -96,19 +97,19 @@ def get_previous_video():
     else:
         # Говорим о том, что мы в начале ленты и дальше видео нет
         return jsonify({"is_start": True})
+    
+    current_video = videos[
+       feed_videos_indexes[(current_video_index) % len(feed_videos_indexes)]
+    ]
 
     if not request.json.get("switch", False):
-        response = videos[
-            feed_videos_indexes[(current_video_index) % len(feed_videos_indexes)]
-        ].to_dict(only=("preview_path",))
+        response = current_video.to_dict(only=("preview_path",))
 
         response["is_start"] = False
         return jsonify(response)
 
     session["current_video_index"] = current_video_index
-    response = videos[
-        feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
-    ].to_dict(
+    response =current_video.to_dict(
         only=(
             "video_path",
             "preview_path",
@@ -118,17 +119,24 @@ def get_previous_video():
             "video_created",
         )
     )
-    author = sess.query(User).get(
-        videos[
-            feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
-        ].author_id
-    )
-    response["likes_count"] = len(videos[feed_videos_indexes[current_video_index % len(feed_videos_indexes)]].likes)
-    response["author_avatar_path"] = author.avatar_image
-    response["author_username"] = author.username
-    response["author_videos_count"] = len(author.videos)
-    response["author_subscribers_count"] = len(author.followers)
-    response["is_start"] = False
+    author = sess.query(User).get(current_video.author_id)
+    response = {
+        **response,
+        "likes_count": len(current_video.likes),
+        "author_avatar_path": author.avatar_image,
+        "author_username": author.username,
+        "author_subscribers_count": len(author.followers),
+        "author_videos_count": len(author.videos),
+        "is_start": False
+    }
+
+    if current_user.is_authenticated:
+        temp = list(
+            filter(lambda video: video.id == current_video.id, current_user.liked_videos)
+        )
+        response["is_video_liked"] = len(temp) == 1
+    else:
+        response["is_video_liked"] = False
 
     return jsonify(response)
 
