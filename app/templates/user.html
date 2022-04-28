@@ -110,7 +110,7 @@
       <div class="user-info__row-block">
         <span class="user__description">16 y.o.{{'\n'}}From Dagestan with love</span>  <!-- заменить на user.description, когда появится соответствующая колонка -->
         {% if current_user.id == user.id %}
-          <button class="add-video button">Add video</button>
+          <a href="{{ url_for('add_video') }}" class="add-video button">Add video</a>
         {% endif %}
       </div>
     </div>

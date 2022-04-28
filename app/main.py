@@ -10,6 +10,8 @@ import config
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
+app.config["MAX_CONTENT_LENGTH"] = config.MAX_CONTENT_LENGTH
+app.config["UPLOAD_EXTENSIONS"] = config.UPLOAD_EXTENSIONS
 
 api = Api(app)
 api.add_resource(VideosListResource, '/api/videos') 

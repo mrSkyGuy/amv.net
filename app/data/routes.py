@@ -2,15 +2,19 @@ from flask import redirect, render_template, url_for, request, session, abort
 from flask_login import current_user, login_user
 
 from random import sample
+from datetime import datetime
+import os
 
 from main import app
 
 from data.db_session import create_session
 from data.models.users import User
+from data.models.videos import Video
 from data.ajax.routes import __video_indexes, videos
 
 from forms.sign_in import SignInForm
 from forms.sign_up import SignUpForm
+from forms.add_video import AddVideoForm
 
 
 @app.route("/")
@@ -137,3 +141,47 @@ def users(username):
             if current_user.is_authenticated
             else False
     )
+
+
+@app.route("/add_video", methods=["GET", "POST"])
+def add_video():
+    if not current_user.is_authenticated:
+        # Если юзер на авторизван, то отправляем его на соответствующую страницу
+        return redirect("/sign_up_in?sign=in")
+    add_video_form = AddVideoForm()
+
+    if add_video_form.validate_on_submit():
+        print(os.getcwd())
+        if "video" in request.files:
+            video_file = request.files['video']
+            video_filename = (  # Название видео файла
+                f"amv.net_video-{current_user.username}"
+                + f"_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
+                + f".{video_file.filename.split('.')[-1]}"
+            )
+            video_file.save(os.path.join("static/videos/", video_filename))
+
+            if add_video_form.preview.data:
+                if "preview" in request.files:
+                    preview_file = request.files['preview']
+                    preview_filename = f"{video_filename}_preview.{preview_file.filename.split('.')[-1]}"
+                    preview_file.save(os.path.join("static/previews/", preview_filename))
+            else:
+                preview_filename = "default.png"
+            description = add_video_form.description.data.strip()
+
+            sess = create_session()
+            cuser = sess.query(User).get(current_user.id)
+            video = Video(
+                video_path=video_filename,
+                preview_path=preview_filename,
+                description=description,
+                author=cuser
+            )
+            sess.add(video)
+            sess.commit()
+
+            return redirect(f"/{current_user.username}")
+        print(request.files.keys())
+
+    return render_template("add-video.html", form=add_video_form)

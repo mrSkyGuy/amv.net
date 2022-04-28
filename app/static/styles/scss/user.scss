@@ -145,7 +145,12 @@ body {
 }
 
 .add-video {
+  display: flex;
   align-self: flex-end;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  color: #000;
 }
 
 .is-following {

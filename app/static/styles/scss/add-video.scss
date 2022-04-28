@@ -1,0 +1,124 @@
+body {
+  font-family: 'Oxanium';
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  z-index: 999;
+  padding: 0 5px;
+  top: 0;
+}
+.header__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: rgba(191, 191, 191, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 0px 0px 20px 20px;
+  padding: 0 12px;
+}
+.domen {
+  position: absolute;
+  text-decoration: none;
+
+  .domen__item {
+    font-family: 'Akaya Telivigala';
+    font-weight: 400;
+    line-height: 100%;
+
+    background: linear-gradient(to right, #8C43EA 30%, #B06AB3);
+    background-size: 200% auto;
+  
+    color: #000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    animation: gradient_animation 7s linear infinite;
+  
+    @keyframes gradient_animation {
+      to { background-position: 200% center; }
+    }
+  }
+
+  .domen-2lvl {
+    font-size: 48px;
+  }
+  
+  .domen-1lvl {
+    font-size: 28px;
+  }
+}
+
+.header__title {
+  position: relative;
+  margin: auto;
+  font-size: 42px;
+}
+
+
+.main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  padding-top: 90px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.form__row {
+  margin-bottom: 5px;
+}
+
+.form__input-label {
+  display: block;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.form-input {
+  font-family: 'Comfortaa';
+  
+  transition: .3s;
+  &:focus {
+    transform: scale(1.03);
+    outline: none;
+    box-shadow: 0px 0px 5px 2px rgba(51, 51, 51, .5);
+  }
+}
+
+.form__submit {
+  align-self: flex-start;
+
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+  
+  background: rgba(140, 67, 234, 0.8);
+  border-radius: 15px;
+  padding: 6px 24px;
+  margin-top: 14px;
+
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 5px 2px rgba(51, 51, 51, .5);
+  }
+  &:active {
+    transform: scale(1);
+    box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, .5);
+  }
+
+}

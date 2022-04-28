@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Oxanium&family=Roboto&family=Comfortaa&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="../static/styles/css/normalize.css">
+  <link rel="stylesheet" href="../static/styles/css/add-video.css">
+
+  <link rel="icon" href="data:;base64,=">
+  <link rel="icon" href="../static/img/favicon.png" type="image/x-icon">
+  <title>Add video</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__container">
+      <a class="domen" href="{{ url_for('feed') }}">
+        <div class="domen__item">
+          <span class="domen-2lvl">amv</span><span class="domen-1lvl">.net</span>
+        </div>
+      </a>
+      <span class="header__title">Add video</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <form method="post" class="form" enctype="multipart/form-data" novalidate>
+      {{ form.csrf_token }}
+
+      <div class="form__row">
+        <div class="mb-3">
+          {{ form.video.label(class="form-input__label form-label") }}
+          {{ form.video(class="form-input form-control") }}
+        </div>
+
+        {% for error in form.video.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <div class="form__row">
+        <div class="mb-3">
+          {{ form.preview.label(class="form-input__label form-label") }}
+          {{ form.preview(class="form-input form-control") }}
+        </div>
+
+        {% for error in form.preview.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <div class="form__row">
+        <div class="input-group">
+          {{ form.description.label(class="form-input__label input-group-text") }}
+          {{ form.description(class="form-input form-control") }}
+        </div>
+
+        {% for error in form.description.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      {{ form.submit(class="form__submit") }}
+    </form>
+  </main>
+</body>
+</html>
