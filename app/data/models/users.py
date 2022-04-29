@@ -42,14 +42,16 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
         secondary="followers",
         primaryjoin=followers.c.author_id == id,
         secondaryjoin=followers.c.follower_id == id,
-        backref="following"
+        backref="following",
+        lazy='subquery'
     )
     liked_videos = sqlalchemy.orm.relation(
         "Video",
         secondary="liked_videos",
         primaryjoin=liked_videos.c.user_id == id,
         secondaryjoin=liked_videos.c.video_id == Video.id,
-        backref="likes"
+        backref="likes",
+        lazy='subquery'
     )
 
     notifications_count = sqlalchemy.Column(sqlalchemy.Integer, default=0)

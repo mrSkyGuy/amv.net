@@ -10,7 +10,6 @@ from main import app
 from data.db_session import create_session
 from data.models.users import User
 from data.models.videos import Video
-from data.ajax.routes import __video_indexes, videos
 
 from forms.sign_in import SignInForm
 from forms.sign_up import SignUpForm
@@ -25,6 +24,15 @@ def root():
 # На данной странице расположена лента. Иначе говоря, это главная
 @app.route("/feed")
 def feed():
+    sess = create_session()
+    videos = sess.query(Video).all()  # Получаем все видео. Пока что это очень 
+    #                                   неразумно - получать все сразу, но в дальнейшем я 
+    #                                   исправлю это
+    
+    # Так как в сессиях не получается хранить список "videos", я решил хранить только индексы.
+    # Да и так будет меньше нагружаться сессия
+    __video_indexes = [i for i in range(len(videos))] 
+
     # Получаем текущую ленту
     if "feed_videos_indexes" not in session.keys():
         session["feed_videos_indexes"] = sample(__video_indexes, len(__video_indexes))
@@ -151,25 +159,25 @@ def add_video():
     add_video_form = AddVideoForm()
 
     if add_video_form.validate_on_submit():
-        print(os.getcwd())
         if "video" in request.files:
-            video_file = request.files['video']
+            video_file = request.files['video']  # Видео файл
             video_filename = (  # Название видео файла
                 f"amv.net_video-{current_user.username}"
                 + f"_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
                 + f".{video_file.filename.split('.')[-1]}"
             )
-            video_file.save(os.path.join("static/videos/", video_filename))
+            video_file.save(os.path.join("static/videos/", video_filename))  # Сохраняем на сервер
 
             if add_video_form.preview.data:
                 if "preview" in request.files:
-                    preview_file = request.files['preview']
+                    preview_file = request.files['preview']  # Превью файла, если пользователь его указал
                     preview_filename = f"{video_filename}_preview.{preview_file.filename.split('.')[-1]}"
                     preview_file.save(os.path.join("static/previews/", preview_filename))
             else:
-                preview_filename = "default.png"
-            description = add_video_form.description.data.strip()
+                preview_filename = "default.png"  # Иначе дефолт
+            description = add_video_form.description.data.strip()  # Описание для видео
 
+            # Сохраняем в БД
             sess = create_session()
             cuser = sess.query(User).get(current_user.id)
             video = Video(
@@ -181,7 +189,9 @@ def add_video():
             sess.add(video)
             sess.commit()
 
+            __video_indexes = [i for i in range(len(sess.query(Video).all()))]
+            session["feed_videos_indexes"] = sample(__video_indexes, len(__video_indexes))
+
             return redirect(f"/{current_user.username}")
-        print(request.files.keys())
 
     return render_template("add-video.html", form=add_video_form)

@@ -9,20 +9,13 @@ from data.models.videos import Video
 from data.models.users import User
 
 
-sess = create_session()
-videos = sess.query(Video).all()  # Получаем все видео. Пока что это очень 
-#                                   неразумно - получать все сразу, но в дальнейшем я 
-#                                   исправлю это
-
-# Так как в сессиях не получается хранить список "videos", я решил хранить только индексы.
-# Да и так будет меньше нагружаться сессия
-__video_indexes = [i for i in range(len(videos))]  
-
-
 # Этот путь запроса служит для получения данных о следующем видео. И, при необходимости, 
 # текущего видео; то есть, перелистывания
 @app.route("/ajax/get_next_video", methods=["POST"])
 def get_next_video():
+    sess = create_session()
+    videos = sess.query(Video).all()
+    __video_indexes = [i for i in range(len(videos))]
     # Получаем случайную ленту. Точнее, случайные индексы для ленты. 
     # Если мы только зашли на сайт, то лента генерируется. В последующих разах, 
     # до тех пор, пока сессия не закроется, будет все та же лента
@@ -69,12 +62,17 @@ def get_next_video():
         )
     )
     # Уточняем сведения об авторе
+    sess = create_session()
     author = sess.query(User).get(
         current_video.author_id
     )
     response = {
         **response,
-        "likes_count": len(current_video.likes),
+        "likes_count": len(sess.query(Video).get(current_video.id).likes),  
+        # Напрямую не обращаюсь, так как вылезает ошибка 
+        # (Нужно поменять конфигурацию модели (я уже поменял, но работает это только 
+        # на новых видео, тк нужно чтобы бд была полностью обновлена))
+        # sqlalchemy.orm.exc.DetachedInstanceError: Parent instance <Video at 0x2013fc99e20> is not bound to a Session; lazy load operation of attribute 'likes' cannot proceed (Background on this error at: https://sqlalche.me/e/14/bhk3)
         "author_avatar_path": author.avatar_image,
         "author_username": author.username,
         "author_subscribers_count": len(author.followers),
@@ -99,6 +97,10 @@ def get_next_video():
 # текущего видео; то есть, перелистывания
 @app.route("/ajax/get_previous_video", methods=["POST"])
 def get_previous_video():
+    sess = create_session()
+    videos = sess.query(Video).all()
+    __video_indexes = [i for i in range(len(videos))]
+
     if "feed_videos_indexes" not in session.keys():
         session["feed_videos_indexes"] = sample(__video_indexes, len(__video_indexes))
     feed_videos_indexes = session["feed_videos_indexes"]
@@ -132,10 +134,11 @@ def get_previous_video():
             "video_created",
         )
     )
+    sess = create_session()
     author = sess.query(User).get(current_video.author_id)
     response = {
         **response,
-        "likes_count": len(current_video.likes),
+        "likes_count": len(sess.query(Video).get(current_video.id).likes),
         "author_avatar_path": author.avatar_image,
         "author_username": author.username,
         "author_subscribers_count": len(author.followers),
@@ -160,15 +163,19 @@ def get_previous_video():
 # обновлениях 
 @app.route("/ajax/add_view_to_current_video")
 def add_view_to_current_video():
+    sess = create_session()
+    videos = sess.query(Video).all()
+
     feed_videos_indexes = session["feed_videos_indexes"]
     current_video_index = session["current_video_index"]
 
     current_video = videos[
         feed_videos_indexes[current_video_index % len(feed_videos_indexes)]
     ]
-
     current_video.views_count += 1
+
     sess.commit()
+
     return jsonify(
         {
             "success": True, 
@@ -184,6 +191,9 @@ def add_view_to_current_video():
 # засчитывается => счетчик лайков останется не тронутым
 @app.route("/ajax/like_current_video")
 def like_current_video():
+    sess = create_session()
+    videos = sess.query(Video).all()
+
     feed_videos_indexes = session["feed_videos_indexes"]
     current_video_index = session["current_video_index"]
 
@@ -192,20 +202,25 @@ def like_current_video():
     ]
 
     if current_user.is_authenticated:
-        user = sess.query(User).get(current_user.id)
-        current_video.likes.append(user)  # Добавляем лайк к видео. 
+        sess = create_session()
+
+        cuser = sess.query(User).get(current_user.id)
+        cvideo = sess.query(Video).get(current_video.id)
+        cvideo.likes.append(cuser)  # Добавляем лайк к видео. 
         # Тем самым, благодаря SQLAlchemy, у нас, к тому же, пополнится список лайкнутых 
         # видео у самого пользователя
         sess.commit()
 
-        return jsonify({"success": True, "current_likes": len(current_video.likes)})
+        return jsonify({"success": True, "current_likes": len(cvideo.likes)})
 
     return jsonify({"success": False})
 
 
-
 @app.route("/ajax/dislike_current_video")
 def dislike_current_video():
+    sess = create_session()
+    videos = sess.query(Video).all()
+
     feed_videos_indexes = session["feed_videos_indexes"]
     current_video_index = session["current_video_index"]
 
@@ -215,9 +230,14 @@ def dislike_current_video():
 
     if current_user.is_authenticated:
         if current_user in current_video.likes:
-            current_video.likes.remove(current_user)
+            sess = create_session()
+
+            cuser = sess.query(User).get(current_user.id)
+            cvideo = sess.query(Video).get(current_video.id)
+            cvideo.likes.remove(cuser)
+
             sess.commit()
-        return jsonify({"success": True, "current_likes": len(current_video.likes)})
+        return jsonify({"success": True, "current_likes": len(cvideo.likes)})
 
     return jsonify({"success": False})
 
@@ -226,6 +246,7 @@ def dislike_current_video():
 @app.route("/ajax/follow_user", methods=["POST"])
 def follow_user():
     if current_user.is_authenticated:
+        sess = create_session()
         author_username = request.json.get("userName")
         author = sess.query(User).filter(User.username == author_username).first()
         temp = list(filter(lambda user: user.id == current_user.id, author.followers))
